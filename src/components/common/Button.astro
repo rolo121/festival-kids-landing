@@ -1,0 +1,64 @@
+---
+interface Props {
+  href?: string;
+  label: string;
+  variant?: 'yellow' | 'blue' | 'white';
+  type?: 'button' | 'submit';
+}
+
+const {
+  href,
+  label,
+  variant = 'yellow',
+  type = 'button',
+} = Astro.props;
+
+const className = `button button--${variant}`;
+---
+
+{href ? (
+  <a class={className} href={href}>{label}</a>
+) : (
+  <button class={className} type={type}>{label}</button>
+)}
+
+<style>
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 12px 24px;
+    border: 0;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-ui);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition:
+      transform 180ms ease,
+      filter 180ms ease;
+  }
+
+  .button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.04);
+  }
+
+  .button--yellow {
+    color: var(--color-orange-dark);
+    background: var(--color-yellow);
+  }
+
+  .button--blue {
+    color: var(--color-white);
+    background: var(--color-blue-dark);
+  }
+
+  .button--white {
+    color: var(--color-text-blue);
+    background: var(--color-white);
+  }
+</style>

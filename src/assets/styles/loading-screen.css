@@ -1,0 +1,242 @@
+/*
+  Festival Kids - Loading Screen
+  Se muestra solo la primera vez por sesión.
+
+  Control:
+  - JS agrega .is-hidden cuando la página cargó.
+  - El head agrega html.fk-loader-skip si ya se mostró en la sesión.
+*/
+
+html.fk-loader-skip .fk-loader {
+  display: none;
+}
+
+body.fk-loading-lock {
+  overflow: hidden;
+}
+
+.fk-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 15% 18%, rgba(255, 230, 0, 0.9) 0 8%, transparent 9%),
+    radial-gradient(circle at 84% 18%, rgba(255, 111, 177, 0.55) 0 9%, transparent 10%),
+    radial-gradient(circle at 78% 82%, rgba(239, 70, 24, 0.5) 0 10%, transparent 11%),
+    linear-gradient(135deg, #00a9e8 0%, #0076de 58%, #005bb8 100%);
+  color: #ffffff;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 560ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 560ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fk-loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.fk-loader__card {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  width: min(100%, 420px);
+  padding: clamp(28px, 5vw, 46px);
+  border-radius: 38px;
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 24px 70px rgba(0, 65, 130, 0.28),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+
+.fk-loader__card::before,
+.fk-loader__card::after {
+  content: '';
+  position: absolute;
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  background: rgba(255, 230, 0, 0.35);
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+.fk-loader__card::before {
+  left: -34px;
+  top: -26px;
+}
+
+.fk-loader__card::after {
+  right: -28px;
+  bottom: -32px;
+  background: rgba(255, 111, 177, 0.32);
+}
+
+.fk-loader__logo {
+  position: relative;
+  z-index: 2;
+  width: min(78vw, 300px);
+  height: auto;
+  filter: drop-shadow(0 12px 16px rgba(0, 73, 140, 0.28));
+  animation: fk-loader-pop 1.2s ease-in-out infinite alternate;
+}
+
+.fk-loader__text {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  color: #ffffff;
+  font-family: var(--font-ui);
+  font-size: clamp(1rem, 4vw, 1.35rem);
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  text-shadow:
+    0 3px 0 rgba(0, 98, 190, 0.55),
+    0 8px 16px rgba(0, 49, 110, 0.25);
+}
+
+.fk-loader__flower {
+  position: relative;
+  z-index: 2;
+  width: 54px;
+  height: 54px;
+  animation: fk-loader-spin 1.8s linear infinite;
+}
+
+.fk-loader__flower::before,
+.fk-loader__flower::after,
+.fk-loader__petal {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 21px;
+  height: 30px;
+  border-radius: 999px 999px 65% 65%;
+  background: #00a9e8;
+  box-shadow: inset 0 0 0 2px #ffffff;
+  transform-origin: 50% 100%;
+}
+
+.fk-loader__flower::before {
+  transform: translate(-50%, -100%) rotate(0deg);
+}
+
+.fk-loader__flower::after {
+  transform: translate(-50%, -100%) rotate(72deg);
+}
+
+.fk-loader__petal:nth-child(1) {
+  transform: translate(-50%, -100%) rotate(144deg);
+}
+
+.fk-loader__petal:nth-child(2) {
+  transform: translate(-50%, -100%) rotate(216deg);
+}
+
+.fk-loader__petal:nth-child(3) {
+  transform: translate(-50%, -100%) rotate(288deg);
+}
+
+.fk-loader__center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  width: 15px;
+  height: 15px;
+  border-radius: 999px;
+  background: #ffe600;
+  box-shadow: inset 0 0 0 2px #ffffff;
+  transform: translate(-50%, -50%);
+}
+
+.fk-loader__dots {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  gap: 8px;
+}
+
+.fk-loader__dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #ffe600;
+  animation: fk-loader-dot 900ms ease-in-out infinite;
+}
+
+.fk-loader__dots span:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.fk-loader__dots span:nth-child(3) {
+  animation-delay: 240ms;
+}
+
+@keyframes fk-loader-pop {
+  from {
+    translate: 0 0;
+    scale: 1;
+  }
+
+  to {
+    translate: 0 -6px;
+    scale: 1.025;
+  }
+}
+
+@keyframes fk-loader-spin {
+  to {
+    rotate: 1turn;
+  }
+}
+
+@keyframes fk-loader-dot {
+  0%,
+  100% {
+    translate: 0 0;
+    opacity: 0.55;
+  }
+
+  50% {
+    translate: 0 -7px;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 767px) {
+  .fk-loader {
+    padding: 18px;
+  }
+
+  .fk-loader__card {
+    width: min(100%, 340px);
+    padding: 30px 22px;
+    border-radius: 30px;
+  }
+
+  .fk-loader__logo {
+    width: min(74vw, 260px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fk-loader,
+  .fk-loader__logo,
+  .fk-loader__flower,
+  .fk-loader__dots span {
+    animation: none !important;
+    transition-duration: 0.001ms !important;
+  }
+}

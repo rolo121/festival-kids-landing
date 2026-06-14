@@ -1,0 +1,491 @@
+/*
+  Festival Kids - Animaciones Fase 1
+  CSS + JavaScript nativo, sin librerías externas.
+
+  Objetivo:
+  - Dar vida a elementos flotantes.
+  - Agregar entradas suaves al hacer scroll.
+  - No modificar layout desktop/mobile existente.
+  - Respetar usuarios con reducción de movimiento.
+*/
+
+:root {
+  --fk-motion-float-small: 8px;
+  --fk-motion-float-medium: 14px;
+  --fk-motion-duration-soft: 4.8s;
+  --fk-motion-duration-medium: 5.8s;
+  --fk-motion-duration-slow: 7.2s;
+  --fk-reveal-distance: 18px;
+  --fk-reveal-duration: 720ms;
+  --fk-reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* -----------------------------
+   Entradas al hacer scroll
+------------------------------ */
+
+.fk-reveal {
+  opacity: 0;
+  translate: 0 var(--fk-reveal-distance);
+  scale: 0.985;
+  transition:
+    opacity var(--fk-reveal-duration) var(--fk-reveal-ease),
+    translate var(--fk-reveal-duration) var(--fk-reveal-ease),
+    scale var(--fk-reveal-duration) var(--fk-reveal-ease);
+  transition-delay: var(--fk-reveal-delay, 0ms);
+  will-change: opacity, translate, scale;
+}
+
+.fk-reveal.fk-reveal--pop {
+  scale: 0.92;
+  translate: 0 12px;
+}
+
+.fk-reveal.fk-reveal--left {
+  translate: -22px 0;
+}
+
+.fk-reveal.fk-reveal--right {
+  translate: 22px 0;
+}
+
+.fk-reveal.is-visible {
+  opacity: 1;
+  translate: 0 0;
+  scale: 1;
+}
+
+/* -----------------------------
+   Animaciones decorativas
+   Usamos translate/rotate/scale individuales
+   para no romper transform existentes.
+------------------------------ */
+
+@keyframes fk-float-soft {
+  0%, 100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 calc(var(--fk-motion-float-small) * -1);
+  }
+}
+
+@keyframes fk-float-medium {
+  0%, 100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 calc(var(--fk-motion-float-medium) * -1);
+  }
+}
+
+@keyframes fk-float-diagonal {
+  0%, 100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 8px -12px;
+  }
+}
+
+@keyframes fk-wiggle-soft {
+  0%, 100% {
+    rotate: 0deg;
+  }
+
+  25% {
+    rotate: -3deg;
+  }
+
+  75% {
+    rotate: 3deg;
+  }
+}
+
+@keyframes fk-sway-card {
+  0%, 100% {
+    rotate: 0deg;
+    translate: 0 0;
+  }
+
+  50% {
+    rotate: 1.25deg;
+    translate: 0 -8px;
+  }
+}
+
+@keyframes fk-spin-soft {
+  from {
+    rotate: 0turn;
+  }
+
+  to {
+    rotate: 1turn;
+  }
+}
+
+@keyframes fk-pulse-soft {
+  0%, 100% {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.045;
+  }
+}
+
+@keyframes fk-bee-flight {
+  0%, 100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+
+  30% {
+    translate: 10px -14px;
+    rotate: -2deg;
+  }
+
+  65% {
+    translate: -8px -6px;
+    rotate: 2deg;
+  }
+}
+
+@keyframes fk-tube-drift {
+  0%, 100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: -10px 8px;
+  }
+}
+
+.fk-motion-float-soft {
+  animation: fk-float-soft var(--fk-motion-duration-soft) ease-in-out infinite;
+  animation-delay: var(--fk-motion-delay, 0s);
+  will-change: translate;
+}
+
+.fk-motion-float-medium {
+  animation: fk-float-medium var(--fk-motion-duration-medium) ease-in-out infinite;
+  animation-delay: var(--fk-motion-delay, 0s);
+  will-change: translate;
+}
+
+.fk-motion-float-diagonal {
+  animation: fk-float-diagonal var(--fk-motion-duration-medium) ease-in-out infinite;
+  animation-delay: var(--fk-motion-delay, 0s);
+  will-change: translate;
+}
+
+.fk-motion-wiggle {
+  animation: fk-wiggle-soft var(--fk-motion-duration-slow) ease-in-out infinite;
+  animation-delay: var(--fk-motion-delay, 0s);
+  will-change: rotate;
+}
+
+.fk-motion-card-sway {
+  animation: fk-sway-card 6.4s ease-in-out infinite;
+  animation-delay: var(--fk-motion-delay, 0s);
+  will-change: translate, rotate;
+}
+
+.fk-motion-spin-soft {
+  animation: fk-spin-soft 9s linear infinite;
+  animation-delay: var(--fk-motion-delay, 0s);
+  will-change: rotate;
+}
+
+.fk-motion-pulse {
+  animation: fk-pulse-soft 3.6s ease-in-out infinite;
+  animation-delay: var(--fk-motion-delay, 0s);
+  will-change: scale;
+}
+
+.fk-motion-bee {
+  animation: fk-bee-flight 4.2s ease-in-out infinite;
+  animation-delay: var(--fk-motion-delay, 0s);
+  will-change: translate, rotate;
+}
+
+.fk-motion-tube {
+  animation: fk-tube-drift 8s ease-in-out infinite;
+  animation-delay: var(--fk-motion-delay, 0s);
+  will-change: translate;
+}
+
+/* -----------------------------
+   Microinteracciones
+------------------------------ */
+
+.fk-tap-bounce {
+  transition:
+    translate 180ms ease,
+    scale 180ms ease,
+    filter 180ms ease;
+}
+
+.fk-tap-bounce:hover {
+  translate: 0 -3px;
+  scale: 1.025;
+  filter: brightness(1.04);
+}
+
+.fk-tap-bounce:active,
+.fk-tap-bounce.is-tapping {
+  translate: 0 2px;
+  scale: 0.97;
+}
+
+/* -----------------------------
+   Aplicación por clases existentes
+   No requiere editar todos los componentes.
+------------------------------ */
+
+/* Hero */
+.hero__logo {
+  animation: fk-float-soft 6.2s ease-in-out infinite;
+}
+
+.hero__date {
+  animation: fk-float-soft 6.8s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.hero__cta {
+  animation: fk-pulse-soft 4.2s ease-in-out infinite;
+}
+
+/* Countdown */
+.countdown__face {
+  animation: fk-float-medium 5.4s ease-in-out infinite;
+}
+
+.countdown__note {
+  animation: fk-sway-card 6.6s ease-in-out infinite;
+}
+
+.countdown__rainbow {
+  animation: fk-float-soft 4.8s ease-in-out infinite;
+  animation-delay: 0.25s;
+}
+
+.countdown__line {
+  animation: fk-wiggle-soft 5.8s ease-in-out infinite;
+}
+
+.countdown__arcade {
+  animation: fk-float-soft 5.2s ease-in-out infinite;
+  animation-delay: 0.45s;
+}
+
+/* Highlights */
+.highlights__item {
+  transition:
+    translate 180ms ease,
+    scale 180ms ease,
+    filter 180ms ease;
+}
+
+.highlights__item:hover {
+  translate: 0 -3px;
+  scale: 1.035;
+  filter: brightness(1.05);
+}
+
+.highlights__item:active {
+  translate: 0 2px;
+  scale: 0.97;
+}
+
+/* Talent Show */
+.talent__pin {
+  animation: fk-wiggle-soft 5.5s ease-in-out infinite;
+}
+
+.talent__microphone {
+  animation: fk-float-medium 5.4s ease-in-out infinite;
+}
+
+.talent__headphones {
+  animation: fk-float-soft 4.9s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.talent-form__calendar-button,
+.talent-form__submit {
+  transition:
+    translate 180ms ease,
+    scale 180ms ease,
+    filter 180ms ease;
+}
+
+.talent-form__calendar-button:hover,
+.talent-form__submit:hover {
+  translate: 0 -2px;
+  scale: 1.025;
+}
+
+/* Mini Maratón */
+.marathon__bee {
+  animation: fk-bee-flight 4.4s ease-in-out infinite;
+}
+
+.marathon__green-element {
+  animation: fk-float-soft 5.2s ease-in-out infinite;
+}
+
+.marathon__blue-element {
+  animation: fk-float-soft 7s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+
+.marathon-form__flower {
+  animation: fk-wiggle-soft 5s ease-in-out infinite;
+}
+
+.marathon-form__submit {
+  transition:
+    translate 180ms ease,
+    scale 180ms ease,
+    filter 180ms ease;
+}
+
+.marathon-form__submit:hover {
+  translate: 0 -2px;
+  scale: 1.025;
+}
+
+/* Peinados Locos */
+.hairstyles__tube,
+.hairstyles__blue-ribbon {
+  animation: fk-tube-drift 8s ease-in-out infinite;
+}
+
+.hairstyles__butterfly {
+  animation: fk-float-diagonal 4.6s ease-in-out infinite;
+}
+
+.hairstyles__pinwheel {
+  animation: fk-spin-soft 10s linear infinite;
+}
+
+.hairstyles__purple-cube,
+.hairstyles__purple-blob {
+  animation: fk-float-soft 5.5s ease-in-out infinite;
+}
+
+.hairstyles__pink-donut,
+.hairstyles__pink-ring {
+  animation: fk-float-medium 6.2s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+
+.hairstyles__screw,
+.hairstyles__pink-spiral,
+.hairstyles__red-spiral {
+  animation: fk-wiggle-soft 4.8s ease-in-out infinite;
+}
+
+.hairstyles__bubble {
+  animation: fk-float-soft 6.5s ease-in-out infinite;
+  animation-delay: 0.2s;
+}
+
+/* Sponsors */
+.sponsors__flower,
+.sponsors__flower--left,
+.sponsors__flower--right {
+  animation: fk-wiggle-soft 6.5s ease-in-out infinite;
+}
+
+.sponsors__pill,
+.sponsors__logos {
+  transition:
+    translate 220ms ease,
+    scale 220ms ease;
+}
+
+.sponsors__pill:hover,
+.sponsors__logos:hover {
+  translate: 0 -2px;
+  scale: 1.01;
+}
+
+/* -----------------------------
+   Mobile: menos intensidad
+------------------------------ */
+
+@media (max-width: 767px) {
+  :root {
+    --fk-motion-float-small: 5px;
+    --fk-motion-float-medium: 8px;
+    --fk-reveal-distance: 12px;
+  }
+
+  .hero__cta {
+    animation: none;
+  }
+
+  .hairstyles__tube,
+  .hairstyles__blue-ribbon {
+    animation-duration: 10s;
+  }
+}
+
+/* -----------------------------
+   Abeja autónoma Mini Maratón
+------------------------------ */
+
+/*
+  La abeja ya no sigue el cursor.
+  JS le asigna destinos suaves dentro de la sección y evita el formulario.
+  Si JS no carga, se mantiene el vuelo decorativo original.
+*/
+.fk-bee-wander-ready .marathon[data-bee-zone] .marathon__bee[data-bee-wander] {
+  --fk-bee-x: 0px;
+  --fk-bee-y: 0px;
+  --fk-bee-rotate: -8deg;
+  --fk-bee-scale-x: 1;
+
+  animation: none;
+  transform:
+    translate3d(var(--fk-bee-x), var(--fk-bee-y), 0)
+    scaleX(var(--fk-bee-scale-x))
+    rotate(var(--fk-bee-rotate));
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  will-change: transform;
+  filter: drop-shadow(0 18px 20px rgba(0, 45, 110, 0.24));
+}
+
+@media (max-width: 767px) {
+  .fk-bee-wander-ready .marathon[data-bee-zone] .marathon__bee[data-bee-wander] {
+    filter: drop-shadow(0 12px 14px rgba(0, 45, 110, 0.18));
+  }
+}
+
+/* -----------------------------
+   Accesibilidad
+------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .fk-reveal {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+}

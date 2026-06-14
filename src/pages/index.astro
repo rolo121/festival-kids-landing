@@ -1,0 +1,35 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import HeroSection from '@components/landing/HeroSection.astro';
+import CountdownSection from '@components/landing/CountdownSection.astro';
+import HighlightsBar from '@components/landing/HighlightsBar.astro';
+import TalentShowSection from '@components/landing/TalentShowSection.astro';
+import MiniMarathonSection from '@components/landing/MiniMarathonSection.astro';
+import CrazyHairstylesSection from '@components/landing/CrazyHairstylesSection.astro';
+import SponsorsSection from '@components/landing/SponsorsSection.astro';
+import { seoInfo } from '@data/event';
+
+const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+---
+
+<BaseLayout
+  title={seoInfo.title}
+  description={seoInfo.description}
+  image={seoInfo.image}
+>
+  <main>
+    <HeroSection />
+    <CountdownSection />
+    <HighlightsBar />
+    <TalentShowSection />
+    <MiniMarathonSection />
+    <CrazyHairstylesSection />
+    <SponsorsSection />
+  </main>
+
+  <script src={withBase('/scripts/countdown.js')}></script>
+  <script src={withBase('/scripts/forms.js')}></script>
+  <script src={withBase('/scripts/tracking.js')}></script>
+  <script src={withBase('/scripts/animations.js')}></script>
+  <script src={withBase('/scripts/cursor-particles.js')}></script>
+</BaseLayout>

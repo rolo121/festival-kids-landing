@@ -1,0 +1,272 @@
+---
+import TalentShowForm from '@components/forms/TalentShowForm.astro';
+const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+
+const talentAssets = {
+  kid: withBase('/images/festival-kids/talent-show/Niño_pose.webp'),
+  microphone: withBase('/images/festival-kids/talent-show/Micrófono.webp'),
+  headphones: withBase('/images/festival-kids/talent-show/Audifonos.webp'),
+  pin: withBase('/images/festival-kids/talent-show/Icono_Pin_Inscripcion.webp'),
+};
+---
+
+<section class="talent" id="talent-show" aria-labelledby="talent-title">
+  <div class="section-shell talent__shell">
+    <img
+      class="talent__pin decorative"
+      src={talentAssets.pin}
+      alt=""
+      loading="lazy"
+      decoding="async"
+    />
+
+    <div class="talent__panel">
+      <div class="talent__image-card">
+        <h2 id="talent-title" class="visually-hidden">Talent Show</h2>
+
+        <div class="talent__image-stage">
+          <img
+            class="talent__kid"
+            src={talentAssets.kid}
+            alt="Niño demostrando su talento en Festival Kids"
+            loading="lazy"
+            decoding="async"
+          />
+
+          <img
+            class="talent__microphone decorative"
+            src={talentAssets.microphone}
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+
+          <img
+            class="talent__headphones decorative"
+            src={talentAssets.headphones}
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+
+      <TalentShowForm />
+    </div>
+  </div>
+</section>
+
+<style>
+  .talent {
+    position: relative;
+    z-index: 1;
+    padding: clamp(20px, 3vw, 38px) 0 clamp(54px, 7vw, 94px);
+    overflow: hidden;
+    background: #ef4618;
+  }
+
+  .talent__shell {
+    position: relative;
+    z-index: 2;
+  }
+
+  .talent__panel {
+    position: relative;
+    display: grid;
+    gap: clamp(24px, 3vw, 48px);
+    align-items: center;
+    width: 100%;
+    padding: clamp(18px, 2.2vw, 30px);
+    border-radius: clamp(24px, 3vw, 42px);
+    background: #ffffff;
+  }
+
+  .talent__image-card {
+    position: relative;
+    min-height: clamp(340px, 56vw, 520px);
+    border-radius: clamp(18px, 2.3vw, 30px);
+    background:
+      radial-gradient(circle at 54% 42%, rgba(255, 125, 31, 0.92) 0 0, transparent 38%),
+      linear-gradient(135deg, #ff6d1c 0%, #ef4618 70%);
+    overflow: hidden;
+  }
+
+  .talent__image-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+  }
+
+  .talent__kid {
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    bottom: clamp(12px, 1.5vw, 24px);
+    width: auto;
+    height: min(86%, clamp(250px, 31vw, 420px));
+    max-width: calc(100% - clamp(42px, 6vw, 96px));
+    transform: translateX(-46%);
+    object-fit: contain;
+    object-position: center bottom;
+  }
+
+  .talent__microphone {
+    position: absolute;
+    z-index: 4;
+    left: clamp(4px, 2vw, 28px);
+    bottom: clamp(38px, 8vw, 82px);
+    width: clamp(90px, 15vw, 162px);
+    max-width: none;
+    transform: rotate(-7deg);
+    filter: drop-shadow(0 14px 18px rgba(91, 0, 84, 0.22));
+  }
+
+  .talent__headphones {
+    position: absolute;
+    z-index: 4;
+    right: clamp(24px, 6vw, 74px);
+    top: clamp(128px, 24vw, 210px);
+    width: clamp(66px, 11vw, 118px);
+    max-width: none;
+    transform: rotate(-12deg);
+    filter: drop-shadow(0 12px 14px rgba(0, 80, 50, 0.16));
+  }
+
+  .talent__pin {
+    position: absolute;
+    z-index: 5;
+    right: clamp(-18px, -1vw, -8px);
+    top: clamp(-18px, -1.2vw, -10px);
+    width: clamp(64px, 7.2vw, 112px);
+    max-width: none;
+    transform: rotate(8deg);
+    filter: drop-shadow(0 10px 10px rgba(0, 80, 150, 0.18));
+  }
+
+  @media (min-width: 860px) {
+    .talent__panel {
+      grid-template-columns: minmax(0, 1.06fr) minmax(360px, 0.94fr);
+    }
+
+    .talent__image-card {
+      min-height: clamp(420px, 32vw, 528px);
+    }
+  }
+
+  @media (min-width: 860px) and (max-width: 1120px) {
+    .talent__image-card {
+      min-height: clamp(390px, 40vw, 470px);
+    }
+
+    .talent__kid {
+      height: min(83%, 360px);
+      max-width: calc(100% - 64px);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .talent__shell {
+      width: min(100% - 120px, 1200px);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .talent {
+      padding-top: 24px;
+    }
+
+    .talent__shell {
+      width: min(100% - 28px, 480px);
+    }
+
+    .talent__panel {
+      padding: 16px;
+      gap: 20px;
+    }
+
+    .talent__pin {
+      right: -14px;
+      top: -18px;
+      width: 62px;
+    }
+
+    .talent__image-card {
+      min-height: 370px;
+    }
+
+    .talent__kid {
+      width: auto;
+      height: min(84%, 292px);
+      max-width: calc(100% - 48px);
+      bottom: 10px;
+      transform: translateX(-50%);
+    }
+
+    .talent__microphone {
+      left: 0;
+      bottom: 42px;
+      width: 92px;
+    }
+
+    .talent__headphones {
+      right: 18px;
+      top: 150px;
+      width: 74px;
+    }
+  }
+
+
+/* ===== FESTIVAL KIDS MOBILE FINAL PATCH START ===== */
+@media (max-width: 767px) {
+  .talent {
+    padding: 24px 0 44px;
+  }
+
+  .talent__shell {
+    width: min(100% - 22px, 420px);
+    margin-inline: auto;
+  }
+
+  .talent__panel {
+    justify-items: center;
+    gap: 18px;
+    padding: 14px;
+    border-radius: 26px;
+  }
+
+  .talent__image-card {
+    width: 100%;
+    min-height: 330px;
+    border-radius: 22px;
+  }
+
+  .talent__kid {
+    left: 50%;
+    width: auto;
+    height: min(82%, 282px);
+    max-width: calc(100% - 48px);
+    bottom: 10px;
+    transform: translateX(-50%);
+  }
+
+  .talent__microphone {
+    left: 6px;
+    bottom: 34px;
+    width: 82px;
+  }
+
+  .talent__headphones {
+    right: 16px;
+    top: 140px;
+    width: 66px;
+  }
+
+  .talent__pin {
+    right: -8px;
+    top: -16px;
+    width: 58px;
+  }
+}
+/* ===== FESTIVAL KIDS MOBILE FINAL PATCH END ===== */
+</style>

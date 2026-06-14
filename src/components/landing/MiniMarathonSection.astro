@@ -1,0 +1,346 @@
+---
+import MarathonForm from '@components/forms/MarathonForm.astro';
+const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+
+const marathonAssets = {
+  background: withBase('/images/festival-kids/marathon/Fondo_MiniMaraton (1).webp'),
+  logo: withBase('/images/festival-kids/marathon/Logo_MiniMaraton_Festival Kids.webp'),
+  bee: withBase('/images/festival-kids/marathon/Abeja_MiniMaraton.webp'),
+  blueElement: withBase('/images/festival-kids/marathon/Elemento_MiniMaraton_2.webp'),
+  greenElement: withBase('/images/festival-kids/marathon/Elemento_MiniMaraton_verde.webp'),
+};
+---
+
+<section class="marathon" id="mini-maraton" aria-labelledby="marathon-title" data-bee-zone>
+  <div class="marathon__background" aria-hidden="true"></div>
+
+  <img
+    class="marathon__blue-element decorative"
+    src={marathonAssets.blueElement}
+    alt=""
+    loading="lazy"
+    decoding="async"
+  />
+
+  <img
+    class="marathon__green-element decorative"
+    src={marathonAssets.greenElement}
+    alt=""
+    loading="lazy"
+    decoding="async"
+  />
+
+  <img
+    class="marathon__bee decorative"
+    data-bee-wander
+    src={marathonAssets.bee}
+    alt=""
+    loading="lazy"
+    decoding="async"
+  />
+
+  <div class="section-shell marathon__content">
+    <div class="marathon__copy">
+      <img
+        class="marathon__logo"
+        src={marathonAssets.logo}
+        alt="Mini Maratón Festival Kids"
+        loading="lazy"
+        decoding="async"
+      />
+
+      <h2 id="marathon-title" class="visually-hidden">Mini Maratón Festival Kids</h2>
+
+      <p class="marathon__description">
+        ¡Si te gusta mucho correr esta carrera es para vos!
+        <br />
+        Te esperamos este domingo 5 de julio a las 9:00 am
+      </p>
+
+      <MarathonForm />
+    </div>
+  </div>
+</section>
+
+<style define:vars={{ marathonBackground: `url("${marathonAssets.background}")` }}>
+  .marathon {
+    position: relative;
+    isolation: isolate;
+    min-height: clamp(650px, 57vw, 860px);
+    overflow: hidden;
+    background-color: #0d7fcc;
+  }
+
+  .marathon__background {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image: var(--marathonBackground);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .marathon__background::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.28) 0%,
+        rgba(0, 0, 0, 0.16) 32%,
+        rgba(0, 0, 0, 0.02) 68%
+      );
+    pointer-events: none;
+  }
+
+  .marathon__content {
+    position: relative;
+    z-index: 3;
+    min-height: inherit;
+    display: flex;
+    align-items: flex-start;
+    padding-top: clamp(42px, 5vw, 72px);
+  }
+
+  .marathon__copy {
+    display: grid;
+    justify-items: start;
+    width: min(100%, 610px);
+    margin-left: clamp(0px, 5vw, 92px);
+  }
+
+  .marathon__logo {
+    width: clamp(300px, 33vw, 520px);
+    max-width: none;
+    height: auto;
+    filter: drop-shadow(0 8px 10px rgba(0, 70, 130, 0.22));
+  }
+
+  .marathon__description {
+    position: relative;
+    z-index: 7;
+    width: max-content;
+    max-width: min(100%, 640px);
+    margin: clamp(12px, 1.4vw, 18px) 0 0;
+    color: #ffffff;
+    font-family: var(--font-ui);
+    font-size: clamp(1.04rem, 1.55vw, 1.55rem);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    
+  }
+
+  .marathon__bee {
+    position: absolute;
+    z-index: 4;
+    left: clamp(470px, 48vw, 880px);
+    top: clamp(250px, 27vw, 410px);
+    width: clamp(150px, 15vw, 260px);
+    max-width: none;
+    transform: rotate(-12deg);
+    filter: drop-shadow(0 16px 18px rgba(0, 45, 110, 0.22));
+  }
+
+  .marathon__blue-element {
+    position: absolute;
+    z-index: 5;
+    right: clamp(-48px, -2vw, -22px);
+    top: clamp(-42px, -1.5vw, -16px);
+    width: clamp(160px, 18vw, 310px);
+    max-width: none;
+    filter: drop-shadow(0 18px 18px rgba(0, 54, 120, 0.18));
+  }
+
+  .marathon__green-element {
+    position: absolute;
+    z-index: 5;
+    right: clamp(210px, 18vw, 360px);
+    bottom: clamp(82px, 9vw, 150px);
+    width: clamp(70px, 8vw, 130px);
+    max-width: none;
+    transform: rotate(-18deg);
+    filter: drop-shadow(0 10px 12px rgba(0, 74, 40, 0.18));
+  }
+
+  @media (min-width: 1440px) {
+    .marathon {
+      min-height: clamp(720px, 56.25vw, 940px);
+    }
+
+    .marathon__content {
+      width: min(100% - 80px, 1400px);
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .marathon {
+      min-height: 760px;
+    }
+
+    .marathon__background {
+      background-position: 62% center;
+    }
+
+    .marathon__content {
+      padding-top: 40px;
+    }
+
+    .marathon__copy {
+      width: min(100%, 520px);
+      margin-left: 0;
+    }
+
+    .marathon__logo {
+      width: min(76vw, 420px);
+    }
+
+    .marathon__bee {
+      left: auto;
+      right: clamp(20px, 8vw, 70px);
+      top: 330px;
+      width: clamp(120px, 22vw, 190px);
+    }
+
+    .marathon__blue-element {
+      width: 190px;
+      right: -42px;
+      top: -28px;
+    }
+
+    .marathon__green-element {
+      right: 16px;
+      bottom: 70px;
+      width: 76px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .marathon {
+      min-height: 820px;
+    }
+
+    .marathon__background {
+      background-position: 66% center;
+    }
+
+    .marathon__background::after {
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.28) 0%,
+          rgba(0, 0, 0, 0.14) 38%,
+          rgba(0, 0, 0, 0.04) 100%
+        );
+    }
+
+    .marathon__content {
+      width: min(100% - 28px, 430px);
+      padding-top: 34px;
+    }
+
+    .marathon__copy {
+      justify-items: start;
+    }
+
+    .marathon__logo {
+      width: min(90vw, 360px);
+    }
+
+    .marathon__description {
+      max-width: 370px;
+      font-size: 1rem;
+      line-height: 1.12;
+    }
+
+    .marathon__bee {
+      right: -4px;
+      top: 370px;
+      width: 120px;
+    }
+
+    .marathon__blue-element {
+      width: 150px;
+      right: -48px;
+      top: -16px;
+    }
+
+    .marathon__green-element {
+      right: 20px;
+      bottom: 42px;
+      width: 64px;
+    }
+  }
+
+
+/* ===== FESTIVAL KIDS MOBILE FINAL PATCH START ===== */
+@media (max-width: 640px) {
+  .marathon {
+    min-height: 780px;
+  }
+
+  .marathon__background {
+    background-position: 63% center;
+  }
+
+  .marathon__background::after {
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.24) 0%,
+        rgba(0, 0, 0, 0.2) 28%,
+        rgba(0, 0, 0, 0.06) 100%
+      );
+  }
+
+  .marathon__content {
+    width: min(100% - 24px, 390px);
+    margin-inline: auto;
+    justify-content: center;
+    padding-top: 26px;
+  }
+
+  .marathon__copy {
+    width: min(100%, 360px);
+    margin-inline: auto;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .marathon__logo {
+    width: min(86vw, 330px);
+  }
+
+  .marathon__description {
+    width: min(100%, 340px);
+    max-width: 340px;
+    margin: 14px auto 14px;
+    font-size: 0.90rem;
+    line-height: 1.12;
+    text-align: center;
+   
+  }
+
+  .marathon__bee {
+    right: -8px;
+    top: 390px;
+    width: 104px;
+  }
+
+  .marathon__blue-element {
+    width: 142px;
+    right: -42px;
+    top: -12px;
+  }
+
+  .marathon__green-element {
+    right: 16px;
+    bottom: 36px;
+    width: 58px;
+  }
+}
+/* ===== FESTIVAL KIDS MOBILE FINAL PATCH END ===== */
+</style>

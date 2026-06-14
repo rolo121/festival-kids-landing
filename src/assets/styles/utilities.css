@@ -1,0 +1,22 @@
+.text-stroke-soft {
+  text-shadow:
+    2px 0 0 #fff,
+    -2px 0 0 #fff,
+    0 2px 0 #fff,
+    0 -2px 0 #fff,
+    2px 2px 0 #fff,
+    -2px -2px 0 #fff,
+    2px -2px 0 #fff,
+    -2px 2px 0 #fff;
+}
+
+.image-placeholder {
+  display: grid;
+  place-items: center;
+  min-height: 180px;
+  border: 2px dashed rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-lg);
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  padding: 24px;
+}

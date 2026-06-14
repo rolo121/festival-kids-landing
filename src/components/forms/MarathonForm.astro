@@ -1,0 +1,283 @@
+---
+const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+const marathonAssets = {
+  flower: withBase('/images/festival-kids/marathon/icono_flor_naranja.webp'),
+};
+---
+
+<form class="marathon-form" data-form="mini-marathon">
+  <input type="hidden" name="form_type" value="mini-marathon" />
+  <input type="hidden" name="source_url" data-source-url />
+  <input type="hidden" name="started_at" data-started-at />
+
+  <label class="fk-honeypot" aria-hidden="true">
+    No llenar este campo
+    <input
+      name="website"
+      type="text"
+      tabindex="-1"
+      autocomplete="off"
+    />
+  </label>
+
+  <div class="marathon-form__tag">
+    <span>Inscripciones abiertas</span>
+
+    <img
+      class="marathon-form__flower decorative"
+      src={marathonAssets.flower}
+      alt=""
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+
+  <label class="marathon-form__field">
+    <span>Nombre del niño/a participante:</span>
+    <input
+      name="nombre_participante"
+      type="text"
+      autocomplete="name"
+      required
+    />
+  </label>
+
+  <label class="marathon-form__field">
+    <span>Edad:</span>
+    <input
+      name="edad"
+      type="text"
+      inputmode="numeric"
+      pattern="[0-9]*"
+      maxlength="2"
+      data-numeric
+      data-maxlength="2"
+      required
+    />
+  </label>
+
+  <button class="marathon-form__submit" type="submit">
+    Enviar inscripción
+  </button>
+
+  <p class="marathon-form__message" data-form-message></p>
+</form>
+
+<style>
+  .fk-honeypot {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .marathon-form {
+    position: relative;
+    z-index: 8;
+    display: grid;
+    gap: 12px;
+    width: min(100%, 430px);
+    margin-top: clamp(46px, 4.4vw, 66px);
+    padding: clamp(22px, 2.4vw, 32px) clamp(22px, 2.8vw, 36px);
+    border-radius: 24px 24px 24px 24px;
+    background: #ffe600;
+    box-shadow: 0 18px 28px rgba(0, 53, 120, 0.18);
+  }
+
+  .marathon-form__tag {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: auto;
+    top: -52px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: min(100%, 380px);
+    min-height: 52px;
+    padding: 10px 38px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #006fe3;
+    font-family: var(--font-ui);
+    font-size: clamp(1.2rem, 2vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1;
+    transform: rotate(1.5deg);
+    box-shadow: 0 12px 18px rgba(0, 53, 120, 0.14);
+  }
+
+  .marathon-form__flower {
+    position: absolute;
+    right: -38px;
+    top: -24px;
+    width: clamp(58px, 6vw, 88px);
+    max-width: none;
+    transform: rotate(8deg);
+    filter: drop-shadow(0 8px 8px rgba(184, 63, 0, 0.2));
+  }
+
+  .marathon-form__field {
+    display: grid;
+    gap: 7px;
+  }
+
+  .marathon-form__field span {
+    color: #006fe3;
+    font-family: var(--font-ui);
+    font-size: clamp(0.78rem, 1.1vw, 0.95rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .marathon-form input,
+  .marathon-form textarea,
+  .marathon-form select {
+    font-family: var(--font-ui);
+    font-weight: 600;
+  }
+
+  .marathon-form input {
+    width: 100%;
+    min-height: clamp(40px, 4vw, 50px);
+    border: 0;
+    border-radius: 12px;
+    background: #f1fae6;
+    color: #123a5f;
+    padding: 10px 14px;
+    outline: none;
+  }
+
+  .marathon-form input:focus {
+    box-shadow: 0 0 0 3px rgba(0, 111, 227, 0.22);
+  }
+
+  .marathon-form__submit {
+    justify-self: start;
+    min-height: 40px;
+    padding: 10px 18px;
+    border: 0;
+    border-radius: 999px;
+    background: #006fe3;
+    color: #ffffff;
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 0 rgba(0, 63, 145, 0.55);
+  }
+
+  .marathon-form__message {
+    min-height: 18px;
+    margin: 0;
+    color: #006fe3;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .marathon-form__message[data-status='success'] {
+    color: #12883b;
+  }
+
+  .marathon-form__message[data-status='error'] {
+    color: #ef4618;
+  }
+
+  @media (max-width: 640px) {
+    .fk-honeypot {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .marathon-form {
+      width: min(100%, 360px);
+      margin-top: 50px;
+      padding: 22px 20px 24px;
+    }
+
+    .marathon-form__tag {
+      top: -46px;
+      min-height: 46px;
+      padding-inline: 24px;
+      font-size: 1.25rem;
+    }
+
+    .marathon-form__flower {
+      right: -26px;
+      top: -18px;
+      width: 58px;
+    }
+
+    .marathon-form__submit {
+      justify-self: stretch;
+    }
+  }
+
+
+/* ===== FESTIVAL KIDS MOBILE FINAL PATCH START ===== */
+@media (max-width: 640px) {
+  .fk-honeypot {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .marathon-form {
+    width: min(100%, 330px);
+    margin: 54px auto 0;
+    padding: 22px 18px 24px;
+    border-radius: 22px;
+    justify-items: stretch;
+    text-align: left;
+  }
+
+  .marathon-form__tag {
+    left: 50%;
+    top: -48px;
+    min-width: min(100%, 300px);
+    min-height: 46px;
+    padding: 10px 24px;
+    font-size: 1.16rem;
+    transform: translateX(-50%) rotate(1.5deg);
+  }
+
+  .marathon-form__flower {
+    right: -22px;
+    top: -18px;
+    width: 56px;
+  }
+
+  .marathon-form input,
+  .marathon-form textarea,
+  .marathon-form select {
+    font-family: var(--font-ui);
+    font-weight: 600;
+  }
+
+  .marathon-form input {
+    min-height: 44px;
+    border-radius: 12px;
+  }
+
+  .marathon-form__submit {
+    justify-self: center;
+    width: min(100%, 250px);
+  }
+}
+/* ===== FESTIVAL KIDS MOBILE FINAL PATCH END ===== */
+</style>

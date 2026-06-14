@@ -1,0 +1,514 @@
+---
+const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+const hairstylesAssets = {
+  title: withBase('/images/festival-kids/hairstyles/Titulo Peinados Locos.webp'),
+  girls: withBase('/images/festival-kids/hairstyles/Niñas_Peinados_Locos (1).webp'),
+  butterfly: withBase('/images/festival-kids/hairstyles/Mariposa_Peinados Locos.webp'),
+  tube: withBase('/images/festival-kids/hairstyles/elemento_tubo_grande_.webp'),
+  pinwheel: withBase('/images/festival-kids/hairstyles/elemento_monolito_ventilador.webp'),
+  purpleCube: withBase('/images/festival-kids/hairstyles/elemento_cubo_morado.webp'),
+  pinkDonut: withBase('/images/festival-kids/hairstyles/elemento_dona_rosa.webp'),
+  pinkScrew: withBase('/images/festival-kids/hairstyles/elemento_tornillo_rosa.webp'),
+};
+---
+
+<section class="hairstyles" id="peinados-locos" aria-labelledby="hairstyles-title">
+  <div class="hairstyles__shell">
+    <div class="hairstyles__visual" aria-hidden="true">
+      <span class="hairstyles__purple-arc decorative"></span>
+
+      <img
+        class="hairstyles__tube decorative"
+        src={hairstylesAssets.tube}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+
+      <img
+        class="hairstyles__girls decorative"
+        src={hairstylesAssets.girls}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+
+      <img
+        class="hairstyles__butterfly decorative"
+        src={hairstylesAssets.butterfly}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+
+      <img
+        class="hairstyles__pinwheel decorative"
+        src={hairstylesAssets.pinwheel}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+
+      <img
+        class="hairstyles__purple-cube decorative"
+        src={hairstylesAssets.purpleCube}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+
+      <img
+        class="hairstyles__pink-donut decorative"
+        src={hairstylesAssets.pinkDonut}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+
+      <img
+        class="hairstyles__screw hairstyles__screw--left decorative"
+        src={hairstylesAssets.pinkScrew}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+
+      <img
+        class="hairstyles__screw hairstyles__screw--top decorative"
+        src={hairstylesAssets.pinkScrew}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <div class="hairstyles__copy">
+      <img
+        id="hairstyles-title"
+        class="hairstyles__title-art"
+        src={hairstylesAssets.title}
+        alt="Concurso de Peinados Locos"
+        loading="lazy"
+        decoding="async"
+      />
+
+      <div class="hairstyles__bubble">
+        <p>
+          ¡Dejá volar la imaginación!
+          <br />
+          Traé a tu peque con su peinado
+          <br />
+          más creativo, divertido y alocado
+          <br />
+          para participar por increíbles
+          <br />
+          premios en Festival Kids.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hairstyles {
+  position: relative;
+  z-index: 4;
+  overflow: visible;
+  background: #ffe600;
+}
+
+  .hairstyles__shell {
+    position: relative;
+    width: 100%;
+    min-height: clamp(560px, 48vw, 700px);
+    margin-inline: auto;
+    padding-top: clamp(46px, 4.8vw, 72px);
+    padding-bottom: 0;
+  }
+
+  .hairstyles__visual {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hairstyles__copy {
+    position: relative;
+    z-index: 8;
+    display: grid;
+    justify-items: start;
+    align-content: start;
+    gap: clamp(16px, 1.6vw, 22px);
+    width: clamp(320px, 29vw, 470px);
+    margin-left: clamp(120px, 15vw, 290px);
+  }
+
+  .hairstyles__title-art {
+    width: clamp(300px, 30vw, 450px);
+    height: auto;
+    max-width: none;
+    filter: drop-shadow(0 5px 0 rgba(255, 255, 255, 0.55));
+  }
+
+  .hairstyles__bubble {
+    position: relative;
+    z-index: 9;
+    width: clamp(310px, 28vw, 430px);
+    padding: clamp(16px, 1.4vw, 22px) clamp(22px, 2vw, 30px);
+    border-radius: clamp(30px, 2.8vw, 44px);
+    background: #ef7a2d;
+    box-shadow:
+      inset 0 0 0 clamp(6px, 0.55vw, 8px) #ffffff,
+      0 12px 18px rgba(180, 70, 0, 0.12);
+  }
+
+  .hairstyles__bubble p {
+    margin: 0;
+    color: #ffffff;
+    font-family: var(--font-ui);
+    font-size: clamp(0.88rem, 1.02vw, 1.12rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: 0.01em;
+    text-align: center;
+    
+  }
+
+  .hairstyles__girls {
+    position: absolute;
+    z-index: 6;
+    left: clamp(490px, 47.2vw, 900px);
+    bottom: 0;
+    width: clamp(500px, 43vw, 730px);
+    max-width: none;
+  }
+
+  .hairstyles__tube {
+    position: absolute;
+    z-index: 3;
+    right: 10%;
+    bottom: -30%;
+    width: 70vw;
+    max-width: none;
+  }
+
+  .hairstyles__purple-arc {
+    position: absolute;
+    z-index: 2;
+    left: clamp(-145px, -6vw, -54px);
+    bottom: clamp(-120px, -6vw, -70px);
+    width: clamp(520px, 48vw, 860px);
+    height: clamp(520px, 48vw, 860px);
+    border: clamp(36px, 4.2vw, 72px) solid transparent;
+    border-left-color: #5028e9;
+    border-bottom-color: #5028e9;
+    border-radius: 50%;
+    transform: rotate(-23deg);
+    filter:
+      drop-shadow(0 16px 18px rgba(32, 0, 130, 0.18))
+      drop-shadow(12px -10px 0 rgba(0, 120, 224, 0.28));
+  }
+
+  .hairstyles__butterfly {
+    position: absolute;
+    z-index: 7;
+    left: clamp(500px, 45vw, 780px);
+    top: clamp(235px, 25vw, 340px);
+    width: clamp(46px, 4.8vw, 78px);
+    max-width: none;
+  }
+
+  .hairstyles__pinwheel {
+    position: absolute;
+    z-index: 7;
+    left: clamp(300px, 28vw, 460px);
+    bottom: clamp(-18px, -0.6vw, -6px);
+    width: clamp(108px, 9.5vw, 165px);
+    max-width: none;
+  }
+
+  .hairstyles__purple-cube {
+    position: absolute;
+    z-index: 7;
+    right: clamp(-28px, -1vw, -10px);
+    top: clamp(62px, 6.5vw, 102px);
+    width: clamp(78px, 7vw, 116px);
+    max-width: none;
+  }
+
+  .hairstyles__pink-donut {
+    position: absolute;
+    z-index: 7;
+    right: clamp(74px, 10vw, 160px);
+    bottom: clamp(142px, 12vw, 210px);
+    width: clamp(56px, 5.8vw, 88px);
+    max-width: none;
+    transform: rotate(-16deg);
+  }
+
+  .hairstyles__screw {
+    position: absolute;
+    z-index: 7;
+    max-width: none;
+  }
+
+  .hairstyles__screw--left {
+    left: clamp(-8px, 1vw, 18px);
+    top: clamp(68px, 7vw, 108px);
+    width: clamp(34px, 3.4vw, 54px);
+    transform: rotate(-38deg);
+  }
+
+  .hairstyles__screw--top {
+    right: clamp(250px, 20vw, 350px);
+    top: clamp(62px, 6.5vw, 102px);
+    width: clamp(30px, 2.9vw, 46px);
+    transform: rotate(20deg);
+    filter: hue-rotate(-60deg) saturate(1.5);
+  }
+
+  @media (max-width: 1199px) {
+    .hairstyles__shell {
+      min-height: 660px;
+      padding-top: 42px;
+    }
+
+    .hairstyles__copy {
+      width: min(100%, 360px);
+      margin-left: clamp(44px, 8vw, 96px);
+    }
+
+    .hairstyles__title-art {
+      width: min(39vw, 370px);
+    }
+
+    .hairstyles__bubble {
+      width: min(34vw, 340px);
+    }
+
+    .hairstyles__bubble p {
+      font-size: 0.84rem;
+    }
+
+    .hairstyles__girls {
+      left: 47vw;
+      width: min(58vw, 600px);
+    }
+
+    .hairstyles__tube {
+      width: min(92vw, 860px);
+      right: 0px;
+      top: 0%;
+    }
+
+    .hairstyles__purple-arc {
+      left: -92px;
+      bottom: -98px;
+      width: 560px;
+      height: 560px;
+      border-width: 46px;
+    }
+
+    .hairstyles__butterfly {
+      left: 46vw;
+      top: 300px;
+      width: 56px;
+    }
+
+    .hairstyles__pinwheel {
+      left: 31vw;
+      bottom: -4px;
+      width: 120px;
+    }
+
+    .hairstyles__purple-cube {
+      right: -12px;
+      top: 88px;
+      width: 82px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hairstyles__shell {
+      width: 100%;
+      min-height: 760px;
+      padding-top: 34px;
+    }
+
+    .hairstyles__copy {
+      gap: 12px;
+      width: min(100%, 300px);
+      margin-left: 24px;
+    }
+
+    .hairstyles__title-art {
+      width: min(78vw, 300px);
+    }
+
+    .hairstyles__bubble {
+      width: min(100%, 286px);
+      padding: 14px 16px;
+      border-radius: 28px;
+      box-shadow: inset 0 0 0 6px #ffffff;
+    }
+
+    .hairstyles__bubble p {
+      font-size: 0.78rem;
+      line-height: 1.08;
+    }
+
+    .hairstyles__girls {
+      left: auto;
+      right: -16px;
+      width: min(98vw, 420px);
+    }
+
+    .hairstyles__tube {
+      width: 560px;
+      right: -190px;
+      top: 118px;
+    }
+
+    .hairstyles__purple-arc {
+      left: -130px;
+      bottom: -108px;
+      width: 390px;
+      height: 390px;
+      border-width: 34px;
+      display: none;
+    }
+
+    .hairstyles__butterfly {
+      left: 58%;
+      top: 326px;
+      width: 44px;
+    }
+
+    .hairstyles__pinwheel {
+      left: 34%;
+      bottom: -6px;
+      width: 104px;
+    }
+
+    .hairstyles__purple-cube {
+      right: -18px;
+      top: 126px;
+      width: 62px;
+    }
+
+    .hairstyles__pink-donut {
+      right: 18px;
+      bottom: 142px;
+      width: 54px;
+    }
+
+    .hairstyles__screw--left {
+      left: -6px;
+      top: 94px;
+      width: 30px;
+    }
+
+    .hairstyles__screw--top {
+      right: 72px;
+      top: 116px;
+      width: 28px;
+    }
+  }
+
+
+/* ===== FESTIVAL KIDS MOBILE FINAL PATCH START ===== */
+@media (max-width: 767px) {
+  .hairstyles__shell {
+    width: 100%;
+    min-height: 670px;
+    padding-top: 30px;
+  }
+
+  .hairstyles__copy {
+    width: min(100% - 28px, 320px);
+    margin-inline: auto;
+    padding-left: 0;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .hairstyles__title-art {
+    width: min(82vw, 292px);
+  }
+
+  .hairstyles__bubble {
+    width: min(100%, 292px);
+    padding: 14px 16px;
+    border-radius: 28px;
+  }
+
+  .hairstyles__bubble p {
+    font-size: 0.76rem;
+    line-height: 1.08;
+  }
+
+  .hairstyles__girls {
+    left: 50%;
+    right: auto;
+    bottom: 0;
+    width: min(96vw, 390px);
+    transform: translateX(-50%);
+  }
+
+  .hairstyles__tube {
+    width: 560px;
+    right: -190px;
+    top: 130px;
+  }
+
+  .hairstyles__purple-arc {
+    left: -132px;
+    bottom: -112px;
+    width: 390px;
+    height: 390px;
+    border-width: 34px;
+  }
+
+  .hairstyles__butterfly {
+    left: 54%;
+    top: 306px;
+    width: 40px;
+  }
+
+  .hairstyles__pinwheel {
+    left: 30%;
+    bottom: -8px;
+    width: 98px;
+  }
+
+  .hairstyles__purple-cube,
+  .hairstyles__purple-blob {
+    right: -16px;
+    top: 118px;
+    width: 58px;
+  }
+
+  .hairstyles__pink-donut,
+  .hairstyles__pink-ring {
+    right: 20px;
+    bottom: 132px;
+    width: 50px;
+  }
+
+  .hairstyles__screw--left,
+  .hairstyles__pink-spiral {
+    left: -4px;
+    top: 90px;
+    width: 28px;
+  }
+
+  .hairstyles__screw--top,
+  .hairstyles__red-spiral {
+    right: 72px;
+    top: 110px;
+    width: 26px;
+  }
+}
+/* ===== FESTIVAL KIDS MOBILE FINAL PATCH END ===== */
+</style>

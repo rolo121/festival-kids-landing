@@ -1,0 +1,106 @@
+---
+const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+const highlights = [
+  {
+    label: 'Shows en vivo',
+    href: '#talent-show',
+    icon: withBase('/images/festival-kids/talent-show/Icono_Shows_en_vivo.webp'),
+  },
+  {
+    label: '+ de 40 marcas',
+    href: '#sponsors',
+    icon: withBase('/images/festival-kids/talent-show/Icono_+_de_40_marcas.webp'),
+  },
+  {
+    label: 'Retos y juegos',
+    href: '#mini-maraton',
+    icon: withBase('/images/festival-kids/talent-show/Icono_retos_y_juegos.webp'),
+  },
+];
+---
+
+<nav class="highlights" aria-label="Actividades destacadas">
+  <div class="section-shell highlights__list">
+    {highlights.map((item) => (
+      <a href={item.href} class="highlights__item" aria-label={item.label}>
+        <img src={item.icon} alt="" loading="lazy" decoding="async" />
+        <span class="visually-hidden">{item.label}</span>
+      </a>
+    ))}
+  </div>
+</nav>
+
+<style>
+  .highlights {
+    position: relative;
+    z-index: 3;
+    padding: clamp(14px, 2vw, 24px) 0 clamp(8px, 1.2vw, 14px);
+    background: #ef4618;
+  }
+
+  .highlights__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(14px, 4vw, 78px);
+  }
+
+  .highlights__item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 180ms ease;
+  }
+
+  .highlights__item:hover {
+    transform: translateY(-2px) rotate(-1deg);
+  }
+
+  .highlights__item img {
+    width: clamp(160px, 20vw, 290px);
+    height: auto;
+    max-width: none;
+  }
+
+  @media (max-width: 767px) {
+    .highlights {
+      padding-block: 16px;
+    }
+
+    .highlights__list {
+      gap: 10px;
+    }
+
+    .highlights__item img {
+      width: min(42vw, 176px);
+    }
+  }
+
+
+/* ===== FESTIVAL KIDS MOBILE FINAL PATCH START ===== */
+@media (max-width: 767px) {
+  .highlights {
+    padding: 12px 0 16px;
+  }
+
+  .highlights__list {
+    width: min(100% - 20px, 360px);
+    margin-inline: auto;
+    justify-content: center;
+    gap: 8px 10px;
+  }
+
+  .highlights__item {
+    flex: 0 0 auto;
+  }
+
+  .highlights__item img {
+    width: min(43vw, 156px);
+  }
+
+  .highlights__item:nth-child(3) img {
+    width: min(48vw, 166px);
+  }
+}
+/* ===== FESTIVAL KIDS MOBILE FINAL PATCH END ===== */
+</style>

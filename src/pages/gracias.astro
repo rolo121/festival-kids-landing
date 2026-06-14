@@ -1,0 +1,214 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Button from '@components/common/Button.astro';
+
+const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+
+const homeHref = import.meta.env.BASE_URL;
+
+const thanksAssets = {
+  logo: withBase('/images/festival-kids/hero/LOGO_LEMA_FESTIVAL KIDS.webp'),
+  flower: withBase('/images/festival-kids/marathon/icono_flor_naranja.webp'),
+};
+---
+
+<BaseLayout
+  title="Gracias por participar | Festival Kids"
+  description="Tu inscripción para Festival Kids fue recibida correctamente."
+>
+  <main class="thanks" data-thanks-page>
+    <section class="thanks__card">
+      <img
+        class="thanks__logo"
+        src={thanksAssets.logo}
+        alt="Festival Kids"
+        loading="eager"
+        decoding="async"
+      />
+
+      <img
+        class="thanks__flower thanks__flower--one decorative"
+        src={thanksAssets.flower}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+
+      <img
+        class="thanks__flower thanks__flower--two decorative"
+        src={thanksAssets.flower}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+
+      <p class="thanks__eyebrow">¡Registro recibido!</p>
+
+      <h1 data-thanks-title>
+        ¡Gracias por participar!
+      </h1>
+
+      <p data-thanks-message>
+        Te esperamos para vivir una aventura increíble en Festival Kids.
+      </p>
+
+      <Button href={homeHref} label="Volver al inicio" variant="yellow" />
+    </section>
+  </main>
+
+  <script is:inline>
+    const thanksCopy = {
+      'talent-show': {
+        title: '¡Gracias por participar en Talent Show!',
+        message: 'Te esperamos para que demostrés todo tu talento en Festival Kids.',
+      },
+      'mini-marathon': {
+        title: '¡Gracias por inscribirte en Mini Maratón!',
+        message: 'Te esperamos para correr, divertirte y vivir una aventura increíble.',
+      },
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const form = params.get('form');
+    const copy = thanksCopy[form] || null;
+
+    if (copy) {
+      const title = document.querySelector('[data-thanks-title]');
+      const message = document.querySelector('[data-thanks-message]');
+
+      if (title) title.textContent = copy.title;
+      if (message) message.textContent = copy.message;
+    }
+  </script>
+</BaseLayout>
+
+<style>
+  .thanks {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    padding: 32px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 12% 18%, rgba(255, 230, 0, 0.85) 0 8%, transparent 9%),
+      radial-gradient(circle at 86% 20%, rgba(255, 111, 177, 0.48) 0 10%, transparent 11%),
+      radial-gradient(circle at 72% 86%, rgba(239, 70, 24, 0.58) 0 12%, transparent 13%),
+      linear-gradient(135deg, #00a9e8 0%, #0076de 52%, #ef4618 100%);
+  }
+
+  .thanks::before,
+  .thanks::after {
+    content: '✦';
+    position: absolute;
+    color: #ffe600;
+    font-size: clamp(3rem, 10vw, 8rem);
+    opacity: 0.7;
+    filter: drop-shadow(0 8px 8px rgba(0, 70, 140, 0.18));
+  }
+
+  .thanks::before {
+    left: 8%;
+    top: 14%;
+    rotate: -12deg;
+  }
+
+  .thanks::after {
+    right: 9%;
+    bottom: 12%;
+    rotate: 16deg;
+  }
+
+  .thanks__card {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    justify-items: center;
+    gap: 18px;
+    width: min(100%, 720px);
+    padding: clamp(34px, 7vw, 68px);
+    border-radius: clamp(30px, 5vw, 56px);
+    background: #ffffff;
+    text-align: center;
+    box-shadow:
+      0 28px 80px rgba(0, 43, 110, 0.26),
+      inset 0 0 0 2px rgba(255, 255, 255, 0.75);
+  }
+
+  .thanks__logo {
+    width: min(78vw, 330px);
+    height: auto;
+    margin-bottom: 4px;
+    filter: drop-shadow(0 10px 12px rgba(0, 90, 170, 0.2));
+  }
+
+  .thanks__eyebrow {
+    margin: 0;
+    color: #ef4618;
+    font-family: var(--font-ui);
+    font-size: clamp(1.15rem, 3vw, 1.65rem);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .thanks h1 {
+    max-width: 620px;
+    margin: 0;
+    color: #006fe3;
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 7.5vw, 5rem);
+    font-weight: 1000;
+    line-height: 0.92;
+    text-wrap: balance;
+  }
+
+  .thanks p[data-thanks-message] {
+    max-width: 560px;
+    margin: 0;
+    color: #123a5f;
+    font-family: var(--font-ui);
+    font-size: clamp(1rem, 2.4vw, 1.35rem);
+    font-weight: 700;
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+
+  .thanks__flower {
+    position: absolute;
+    width: clamp(58px, 9vw, 96px);
+    max-width: none;
+    filter: drop-shadow(0 10px 10px rgba(184, 63, 0, 0.2));
+  }
+
+  .thanks__flower--one {
+    right: clamp(18px, 4vw, 46px);
+    top: clamp(18px, 4vw, 44px);
+    rotate: 12deg;
+  }
+
+  .thanks__flower--two {
+    left: clamp(18px, 4vw, 46px);
+    bottom: clamp(18px, 4vw, 44px);
+    rotate: -18deg;
+  }
+
+  @media (max-width: 640px) {
+    .thanks {
+      padding: 18px;
+    }
+
+    .thanks__card {
+      gap: 16px;
+      padding: 34px 22px 38px;
+    }
+
+    .thanks__logo {
+      width: min(78vw, 260px);
+    }
+
+    .thanks__flower {
+      width: 58px;
+      opacity: 0.85;
+    }
+  }
+</style>

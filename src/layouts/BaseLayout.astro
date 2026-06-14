@@ -1,0 +1,79 @@
+---
+import '@styles/global.css';
+import '@styles/utilities.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+
+const {
+  title,
+  description,
+  image = withBase('/images/festival-kids/reference/landing-reference.jpg'),
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={image} />
+
+    <meta name="theme-color" content="#159dec" />
+
+    <script is:inline>
+      try {
+        if (sessionStorage.getItem('festival-kids-loader-seen') === '1') {
+          document.documentElement.classList.add('fk-loader-skip');
+        }
+      } catch {
+        // sessionStorage puede no estar disponible en modo privado.
+      }
+    </script>
+  </head>
+
+  <body>
+
+    <div class="fk-loader" data-loader role="status" aria-live="polite" aria-label="Cargando Festival Kids">
+      <div class="fk-loader__card">
+        <img
+          class="fk-loader__logo"
+          src={withBase('/images/festival-kids/hero/LOGO_LEMA_FESTIVAL KIDS.webp')}
+          alt="Festival Kids"
+          loading="eager"
+          decoding="async"
+        />
+
+        <div class="fk-loader__flower" aria-hidden="true">
+          <span class="fk-loader__petal"></span>
+          <span class="fk-loader__petal"></span>
+          <span class="fk-loader__petal"></span>
+          <span class="fk-loader__center"></span>
+        </div>
+
+        <p class="fk-loader__text">Cargando aventura...</p>
+
+        <div class="fk-loader__dots" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+
+    <slot />
+
+    <script src={withBase('/scripts/loading-screen.js')}></script>
+  </body>
+</html>

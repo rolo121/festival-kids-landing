@@ -1,0 +1,553 @@
+---
+import { participationDays } from '@data/forms';
+const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+
+const formAssets = {
+  title: withBase('/images/festival-kids/talent-show/Titulo Inscripcion.webp'),
+  calendar: withBase('/images/festival-kids/talent-show/Icono_calendario_Inscripcion.webp'),
+};
+---
+
+<form class="talent-form" data-form="talent-show">
+  <input type="hidden" name="form_type" value="talent-show" />
+  <input type="hidden" name="source_url" data-source-url />
+  <input type="hidden" name="started_at" data-started-at />
+
+  <label class="fk-honeypot" aria-hidden="true">
+    No llenar este campo
+    <input
+      name="website"
+      type="text"
+      tabindex="-1"
+      autocomplete="off"
+    />
+  </label>
+
+  <div class="talent-form__heading">
+    <img
+      class="talent-form__title-img"
+      src={formAssets.title}
+      alt="¡Demostrá todo tu talento!"
+      loading="lazy"
+      decoding="async"
+    />
+
+    <h3 class="visually-hidden">¡Demostrá todo tu talento!</h3>
+
+    <p>Participá en nuestro Talent Show y ganá premios increíbles.</p>
+  </div>
+
+  <label class="talent-form__field talent-form__field--full">
+    <span>Nombre completo de el/la participante:</span>
+    <input name="nombre_participante" type="text" required />
+  </label>
+
+  <label class="talent-form__field talent-form__field--full">
+    <span>Talento a demostrar:</span>
+    <input name="talento" type="text" required />
+  </label>
+
+  <div class="talent-form__group">
+    <span class="talent-form__group-label">Nombre y número de teléfono del tutor:</span>
+
+    <label class="visually-hidden" for="nombre_tutor">Nombre del tutor</label>
+    <input id="nombre_tutor" name="nombre_tutor" type="text" required />
+
+    <label class="visually-hidden" for="telefono_tutor">Teléfono del tutor</label>
+    <input
+      id="telefono_tutor"
+      name="telefono_tutor"
+      type="text"
+      inputmode="numeric"
+      pattern="[0-9]*"
+      maxlength="8"
+      autocomplete="tel"
+      data-numeric
+      data-maxlength="8"
+      required
+    />
+  </div>
+
+  <div class="talent-form__day" data-date-picker>
+    <span class="talent-form__day-label">Día a participar</span>
+
+    <input
+      data-date-input
+      name="dia_participacion"
+      type="hidden"
+      required
+    />
+
+    <button
+      class="talent-form__calendar-button"
+      type="button"
+      aria-label="Seleccionar día de participación"
+      aria-expanded="false"
+      data-date-trigger
+    >
+      <img
+        class="talent-form__calendar"
+        src={formAssets.calendar}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+    </button>
+
+    <span class="talent-form__selected-date" data-date-label>
+      Seleccionar día
+    </span>
+
+    <div class="talent-form__date-modal" data-date-modal hidden>
+      <p>Seleccioná el día</p>
+
+      <div class="talent-form__date-options">
+        {participationDays.map((day) => (
+          <button
+            type="button"
+            data-date-option
+            data-value={day.value}
+            data-label={day.label}
+          >
+            {day.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <button class="talent-form__submit" type="submit">
+    Enviar inscripción
+  </button>
+
+  <p class="talent-form__message" data-form-message></p>
+</form>
+
+<script>
+  const datePickers = document.querySelectorAll<HTMLElement>('[data-date-picker]');
+
+  datePickers.forEach((picker) => {
+    const trigger = picker.querySelector<HTMLButtonElement>('[data-date-trigger]');
+    const modal = picker.querySelector<HTMLElement>('[data-date-modal]');
+    const input = picker.querySelector<HTMLInputElement>('[data-date-input]');
+    const label = picker.querySelector<HTMLElement>('[data-date-label]');
+    const options = picker.querySelectorAll<HTMLButtonElement>('[data-date-option]');
+
+    if (!trigger || !modal || !input || !label) return;
+
+    const close = () => {
+      modal.hidden = true;
+      trigger.setAttribute('aria-expanded', 'false');
+    };
+
+    const open = () => {
+      modal.hidden = false;
+      trigger.setAttribute('aria-expanded', 'true');
+    };
+
+    trigger.addEventListener('click', (event) => {
+      event.stopPropagation();
+
+      if (modal.hidden) {
+        open();
+      } else {
+        close();
+      }
+    });
+
+    options.forEach((option) => {
+      option.addEventListener('click', () => {
+        input.value = option.dataset.value || '';
+        label.textContent = option.dataset.label || 'Seleccionar día';
+        label.classList.add('is-selected');
+        close();
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!(event.target instanceof Node)) return;
+
+      if (!picker.contains(event.target)) {
+        close();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        close();
+      }
+    });
+  });
+</script>
+
+<style>
+  .fk-honeypot {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .talent-form {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: clamp(12px, 1.5vw, 18px);
+    padding: clamp(10px, 1.4vw, 18px) clamp(12px, 2.2vw, 28px);
+    background: transparent;
+    color: #006bd0;
+    box-shadow: none;
+  }
+
+  .talent-form__heading {
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+    margin-bottom: 2px;
+    text-align: center;
+  }
+
+  .talent-form__title-img {
+    width: min(100%, 410px);
+    height: auto;
+    max-width: none;
+  }
+
+  .talent-form__heading p {
+    margin: 0;
+    color: #006bd0;
+    font-family: var(--font-ui);
+    font-size: clamp(0.78rem, 1.1vw, 0.98rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .talent-form__field {
+    display: grid;
+    gap: 8px;
+  }
+
+  .talent-form__field span,
+  .talent-form__group-label,
+  .talent-form__day-label {
+    color: #006bd0;
+    font-family: var(--font-ui);
+    font-size: clamp(0.92rem, 1.32vw, 1.18rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .talent-form input,
+  .talent-form textarea,
+  .talent-form select {
+    font-family: var(--font-ui);
+    font-weight: 600;
+  }
+
+  .talent-form input {
+    width: 100%;
+    min-height: clamp(40px, 4vw, 52px);
+    border: 0;
+    border-radius: 18px;
+    background: #dceafc;
+    color: #123a5f;
+    padding: 10px 16px;
+    outline: none;
+    box-shadow: none;
+  }
+
+  .talent-form input:focus {
+    box-shadow: 0 0 0 3px rgba(0, 107, 208, 0.2);
+  }
+
+  .talent-form__group {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 8px 12px;
+  }
+
+  .talent-form__group-label {
+    grid-column: 1 / -1;
+  }
+
+  .talent-form__day {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 2px;
+  }
+
+  .talent-form__day-label {
+    flex: 0 0 auto;
+  }
+
+  .talent-form__calendar-button {
+    flex: 0 0 auto;
+    width: clamp(54px, 6vw, 76px);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    transition:
+      transform 180ms ease,
+      filter 180ms ease;
+  }
+
+  .talent-form__calendar-button:hover {
+    transform: translateY(-2px) rotate(-2deg);
+    filter: brightness(1.03);
+  }
+
+  .talent-form__calendar {
+    width: 100%;
+    height: auto;
+  }
+
+  .talent-form__selected-date {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #dceafc;
+    color: #006bd0;
+    font-family: var(--font-ui);
+    font-size: clamp(0.74rem, 1vw, 0.88rem);
+    font-weight: 700;
+  }
+
+  .talent-form__selected-date.is-selected {
+    background: #ffe600;
+    color: #ef4618;
+  }
+
+  .talent-form__date-modal {
+    position: absolute;
+    z-index: 20;
+    left: clamp(120px, 32%, 190px);
+    top: calc(100% + 10px);
+    width: min(260px, 82vw);
+    padding: 14px;
+    border: 4px solid #ffffff;
+    border-radius: 20px;
+    background: #0076de;
+    box-shadow: 0 18px 28px rgba(0, 61, 130, 0.24);
+  }
+
+  .talent-form__date-modal p {
+    margin: 0 0 10px;
+    color: #ffffff;
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .talent-form__date-options {
+    display: grid;
+    gap: 8px;
+  }
+
+  .talent-form__date-options button {
+    min-height: 42px;
+    border: 0;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #0076de;
+    font-family: var(--font-ui);
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      transform 160ms ease,
+      background 160ms ease,
+      color 160ms ease;
+  }
+
+  .talent-form__date-options button:hover {
+    transform: translateY(-1px);
+    background: #ffe600;
+    color: #ef4618;
+  }
+
+  .talent-form__submit {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    margin-top: 2px;
+    padding: 10px 22px;
+    border: 0;
+    border-radius: 999px;
+    background: #ffe600;
+    color: #ef4618;
+    font-family: var(--font-ui);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 0 rgba(238, 181, 0, 0.75);
+  }
+
+  .talent-form__message {
+    min-height: 18px;
+    margin: 0;
+    color: #006bd0;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .talent-form__message[data-status='success'] {
+    color: #12883b;
+  }
+
+  .talent-form__message[data-status='error'] {
+    color: #ef4618;
+  }
+
+  @media (min-width: 860px) {
+    .fk-honeypot {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .talent-form {
+      min-height: clamp(420px, 32vw, 528px);
+      align-content: center;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .fk-honeypot {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .talent-form {
+      padding: 10px 6px 8px;
+    }
+
+    .talent-form__group {
+      grid-template-columns: 1fr;
+    }
+
+    .talent-form__day {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .talent-form__selected-date {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .talent-form__date-modal {
+      left: 0;
+      right: 0;
+      width: 100%;
+    }
+
+    .talent-form__submit {
+      justify-self: stretch;
+    }
+  }
+
+
+/* ===== FESTIVAL KIDS MOBILE FINAL PATCH START ===== */
+@media (max-width: 767px) {
+  .fk-honeypot {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .talent-form {
+    width: 100%;
+    max-width: 360px;
+    margin-inline: auto;
+    padding: 8px 4px 10px;
+    justify-items: stretch;
+    text-align: center;
+  }
+
+  .talent-form__heading {
+    justify-items: center;
+  }
+
+  .talent-form__title-img {
+    width: min(100%, 310px);
+  }
+
+  .talent-form__field,
+  .talent-form__group {
+    width: 100%;
+    text-align: left;
+  }
+
+  .talent-form__group {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .talent-form input,
+  .talent-form textarea,
+  .talent-form select {
+    font-family: var(--font-ui);
+    font-weight: 600;
+  }
+
+  .talent-form input {
+    min-height: 42px;
+    border-radius: 15px;
+  }
+
+  .talent-form__day {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .talent-form__selected-date {
+    width: min(100%, 280px);
+    justify-content: center;
+    margin-inline: auto;
+  }
+
+  .talent-form__date-modal {
+    left: 50%;
+    right: auto;
+    width: min(100%, 300px);
+    transform: translateX(-50%);
+  }
+
+  .talent-form__submit {
+    justify-self: center;
+    width: min(100%, 300px);
+  }
+}
+/* ===== FESTIVAL KIDS MOBILE FINAL PATCH END ===== */
+</style>

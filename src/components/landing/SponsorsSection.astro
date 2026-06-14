@@ -1,0 +1,361 @@
+---
+const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+const sponsorAssets = {
+  background: withBase('/images/festival-kids/sponsors/FONDO_LOGOS.webp'),
+  flower: withBase('/images/festival-kids/sponsors/icono_flor_verde.webp'),
+  orangeFlower: withBase('/images/festival-kids/marathon/icono_flor_naranja.webp'),
+  presentan: [
+    {
+      name: 'Nido',
+      logo: withBase('/images/festival-kids/sponsors/presentan/logo_nido.webp'),
+    },
+    {
+      name: 'Dog Chow',
+      logo: withBase('/images/festival-kids/sponsors/presentan/logo_dog_chow.webp'),
+    },
+    {
+      name: 'Maggi',
+      logo: withBase('/images/festival-kids/sponsors/presentan/logo_maggi.webp'),
+    },
+    {
+      name: 'Presto',
+      logo: withBase('/images/festival-kids/sponsors/presentan/logo_presto.webp'),
+    },
+  ],
+  patrocinan: withBase('/images/festival-kids/sponsors/marcas/Logo_patrocinan.webp'),
+  marcas: withBase('/images/festival-kids/sponsors/marcas/logo_patrocinan_mas.webp'),
+  powered: withBase('/images/festival-kids/sponsors/footer_btl_festival.webp'),
+};
+---
+
+<section class="sponsors" id="sponsors" aria-labelledby="sponsors-title">
+  <div class="sponsors__background" aria-hidden="true"></div>
+
+  <img
+    class="sponsors__flower sponsors__flower--left decorative"
+    src={sponsorAssets.flower}
+    alt=""
+    loading="lazy"
+    decoding="async"
+  />
+
+  <img
+    class="sponsors__flower sponsors__flower--right decorative"
+    src={sponsorAssets.orangeFlower}
+    alt=""
+    loading="lazy"
+    decoding="async"
+  />
+
+  <div class="section-shell sponsors__inner">
+    <h2 id="sponsors-title" class="visually-hidden">Patrocinadores Festival Kids</h2>
+
+    <div class="sponsors__group sponsors__group--presentan" aria-labelledby="presentan-title">
+      <h3 id="presentan-title">Presentan</h3>
+
+      <div class="sponsors__presentan-logos">
+        {sponsorAssets.presentan.map((sponsor) => (
+          <img
+            src={sponsor.logo}
+            alt={sponsor.name}
+            loading="lazy"
+            decoding="async"
+          />
+        ))}
+      </div>
+    </div>
+
+    <div class="sponsors__group sponsors__group--patrocinan" aria-labelledby="patrocinan-title">
+      <h3 id="patrocinan-title" class="visually-hidden">Patrocinan</h3>
+
+      <img
+        class="sponsors__patrocinan-img"
+        src={sponsorAssets.patrocinan}
+        alt="Marcas patrocinadoras de Festival Kids"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <div class="sponsors__group sponsors__group--marcas" aria-label="Marcas participantes">
+      <img
+        class="sponsors__marcas-img"
+        src={sponsorAssets.marcas}
+        alt="Marcas participantes de Festival Kids"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  </div>
+
+  <div class="sponsors__powered" aria-label="Powered by BTL Marketing">
+    <img
+      class="sponsors__powered-img"
+      src={sponsorAssets.powered}
+      alt="Powered by BTL Marketing"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+</section>
+
+<style define:vars={{ sponsorBackground: `url("${sponsorAssets.background}")` }}>
+  .sponsors {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: clamp(54px, 7vw, 86px) 0 0;
+    background-color: #f4f4f1;
+  }
+
+  .sponsors__background {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image: var(--sponsorBackground);
+    background-repeat: repeat;
+    background-size: clamp(520px, 52vw, 900px) auto;
+    background-position: center top;
+  }
+
+  .sponsors__inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    justify-items: center;
+    gap: clamp(38px, 4.4vw, 64px);
+    width: min(100% - 36px, 1120px);
+    margin-bottom: clamp(84px, 9vw, 128px);
+    text-align: center;
+  }
+
+  .sponsors__group {
+    display: grid;
+    justify-items: center;
+    gap: 14px;
+    width: 100%;
+  }
+
+  .sponsors__group h3 {
+    margin: 0;
+    color: #0a9dde;
+    font-family: var(--font-ui);
+    font-size: clamp(1.25rem, 2.1vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .sponsors__presentan-logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(18px, 2.2vw, 32px);
+  }
+
+  .sponsors__presentan-logos img {
+    width: auto;
+    height: clamp(50px, 5.8vw, 82px);
+    max-width: 180px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.08));
+  }
+
+  .sponsors__pill {
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+    background: #ffffff;
+    border-radius: 999px;
+    box-shadow:
+      0 12px 22px rgba(0, 0, 0, 0.06),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+  }
+
+  .sponsors__pill--medium {
+    width: min(100%, 680px);
+    padding: clamp(14px, 1.6vw, 20px) clamp(28px, 4vw, 52px);
+  }
+
+  .sponsors__pill--wide {
+    width: min(100%, 940px);
+    padding: clamp(14px, 1.8vw, 22px) clamp(24px, 4vw, 48px);
+    border-radius: 24px;
+  }
+
+  .sponsors__patrocinan-img {
+    width: min(92vw, 540px);
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.08));
+  }
+
+  .sponsors__marcas-img {
+    width: min(94vw, 980px);
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.06));
+  }
+
+  .sponsors__powered {
+    width: 100%;
+    background-color: #006cee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .sponsors__powered-img {
+    width: 100%;
+    max-width: 1920px;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .sponsors__flower {
+    position: absolute;
+    z-index: 3;
+    max-width: none;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .sponsors__flower--left {
+    left: clamp(-30px, -1.5vw, -12px);
+    top: clamp(150px, 18vw, 230px);
+    width: clamp(56px, 6vw, 92px);
+    filter: drop-shadow(0 8px 10px rgba(67, 150, 0, 0.16));
+  }
+
+  .sponsors__flower--right {
+    right: clamp(-22px, -1vw, -8px);
+    bottom: clamp(120px, 14vw, 198px);
+    width: clamp(58px, 6vw, 96px);
+    filter: drop-shadow(0 8px 10px rgba(180, 70, 0, 0.16));
+  }
+
+  @media (max-width: 767px) {
+    .sponsors {
+      padding: 48px 0 0;
+    }
+
+    .sponsors__inner {
+      width: min(100% - 28px, 460px);
+      gap: 32px;
+      margin-bottom: 80px;
+    }
+
+    .sponsors__presentan-logos {
+      gap: 14px 18px;
+    }
+
+    .sponsors__presentan-logos img {
+      height: 50px;
+      max-width: 120px;
+    }
+
+    .sponsors__pill--medium {
+      width: min(100%, 390px);
+      padding: 16px 22px;
+      border-radius: 28px;
+    }
+
+    .sponsors__pill--wide {
+      width: min(100%, 390px);
+      padding: 14px 18px;
+      border-radius: 20px;
+    }
+
+    .sponsors__patrocinan-img {
+      width: min(96vw, 390px);
+    }
+
+    .sponsors__marcas-img {
+      width: min(96vw, 420px);
+    }
+
+    .sponsors__flower--left {
+      left: -24px;
+      top: 130px;
+      width: 58px;
+    }
+
+    .sponsors__flower--right {
+      right: -20px;
+      bottom: 114px;
+      width: 60px;
+    }
+  }
+
+  /* ===== FESTIVAL KIDS MOBILE FINAL PATCH START ===== */
+  .sponsors__group--patrocinan h3 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 767px) {
+    .sponsors {
+      padding: 44px 0 0;
+    }
+
+    .sponsors__inner {
+      width: min(100% - 24px, 420px);
+      margin-inline: auto;
+      gap: 30px;
+      justify-items: center;
+      margin-bottom: 74px;
+    }
+
+    .sponsors__presentan-logos {
+      justify-content: center;
+      gap: 14px 16px;
+    }
+
+    .sponsors__presentan-logos img {
+      height: 48px;
+      max-width: 118px;
+    }
+
+    .sponsors__pill--medium {
+      width: min(100%, 380px);
+      padding: 16px 20px;
+      border-radius: 28px;
+    }
+
+    .sponsors__pill--wide {
+      width: min(100%, 390px);
+      padding: 14px 16px;
+      border-radius: 20px;
+    }
+
+    .sponsors__patrocinan-img {
+      width: min(100%, 330px);
+    }
+
+    .sponsors__marcas-img {
+      width: min(100%, 360px);
+    }
+
+    .sponsors__flower--left {
+      left: -24px;
+      top: 128px;
+      width: 56px;
+    }
+
+    .sponsors__flower--right {
+      right: -20px;
+      bottom: 104px;
+      width: 60px;
+    }
+  }
+  /* ===== FESTIVAL KIDS MOBILE FINAL PATCH END ===== */
+</style>

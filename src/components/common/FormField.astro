@@ -1,0 +1,54 @@
+---
+interface Props {
+  label: string;
+  name: string;
+  type?: string;
+  placeholder?: string;
+  required?: boolean;
+}
+
+const {
+  label,
+  name,
+  type = 'text',
+  placeholder = '',
+  required = false,
+} = Astro.props;
+---
+
+<label class="form-field">
+  <span>{label}</span>
+  <input
+    name={name}
+    type={type}
+    placeholder={placeholder}
+    required={required}
+  />
+</label>
+
+<style>
+  .form-field {
+    display: grid;
+    gap: 7px;
+    color: var(--color-blue-deep);
+    font-family: var(--font-ui);
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .form-field input {
+    width: 100%;
+    min-height: 44px;
+    border: 0;
+    border-radius: 14px;
+    background: #dcecff;
+    color: var(--color-text-dark);
+    padding: 10px 14px;
+    font-weight: 600;
+    outline: none;
+  }
+
+  .form-field input:focus {
+    box-shadow: 0 0 0 3px rgba(21, 157, 236, 0.25);
+  }
+</style>

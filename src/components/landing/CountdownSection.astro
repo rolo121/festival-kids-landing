@@ -1,0 +1,499 @@
+---
+import { eventInfo } from '@data/event';
+const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+
+const countdownAssets = {
+  background: withBase('/images/festival-kids/countdown/Fondo_Conteo_Fecha (1).webp'),
+  face: withBase('/images/festival-kids/countdown/Elemento_cara_1.webp'),
+  note: withBase('/images/festival-kids/countdown/Elemento_nota_fecha.webp'),
+  rainbow: withBase('/images/festival-kids/countdown/Elemento_arcoiris_2.webp'),
+  arcade: withBase('/images/festival-kids/countdown/Elemento_Arcade.webp'),
+  line: withBase('/images/festival-kids/countdown/Elemento_linea.webp'),
+};
+---
+
+<section
+  class="countdown"
+  aria-labelledby="countdown-title"
+  data-countdown
+  data-target-date={eventInfo.targetDate}
+>
+  <div class="countdown__background" aria-hidden="true"></div>
+
+  <div class="countdown__inner">
+    <img
+      class="countdown__face decorative"
+      src={countdownAssets.face}
+      alt=""
+      loading="lazy"
+      decoding="async"
+    />
+
+    <h2 id="countdown-title" class="countdown__title">Faltan:</h2>
+
+    <div class="countdown__note" aria-live="polite">
+      <img
+        class="countdown__note-img"
+        src={countdownAssets.note}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+
+      <span class="countdown__value" data-countdown-value>1 MES</span>
+
+      <img
+        class="countdown__rainbow decorative"
+        src={countdownAssets.rainbow}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <img
+      class="countdown__line decorative"
+      src={countdownAssets.line}
+      alt=""
+      loading="lazy"
+      decoding="async"
+    />
+
+    <img
+      class="countdown__arcade decorative"
+      src={countdownAssets.arcade}
+      alt=""
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+</section>
+
+<style define:vars={{ countdownBackground: `url("${countdownAssets.background}")` }}>
+  .countdown {
+    position: relative;
+    z-index: 2;
+     min-height: clamp(250px, 19vw, 380px);
+    overflow: hidden;
+    background-color: #0b8fde;
+  }
+
+  .countdown__background {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-color: #0b8fde;
+    background-image: var(--countdownBackground);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .countdown__inner {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    min-height: clamp(250px, 19vw, 380px);
+    margin-inline: auto;
+  }
+
+  .countdown__face {
+    position: absolute;
+    z-index: 4;
+    left: clamp(80px, 12.6vw, 245px);
+    top: 50%;
+    width: clamp(108px, 11.6vw, 205px);
+    transform: translateY(-50%);
+    filter: drop-shadow(0 14px 18px rgba(0, 64, 128, 0.16));
+  }
+
+  .countdown__title {
+    position: absolute;
+    z-index: 5;
+    left: clamp(245px, 30.4vw, 585px);
+    top: 50%;
+    margin: 0;
+    color: #ffffff;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 4.55vw, 5.55rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.015em;
+    transform: translateY(-53%);
+    text-shadow: 0 5px 0 rgba(0, 107, 183, 0.12);
+    white-space: nowrap;
+  }
+
+  .countdown__note {
+    --note-visible-width: 82%;
+    --note-offset-x: calc((100% - var(--note-visible-width)) / 2);
+
+    position: absolute;
+    z-index: 4;
+    left: clamp(455px, 52.4vw, 1000px);
+    top: 48%;
+    width: clamp(420px, 37vw, 650px);
+    transform: translateY(-50%) rotate(-5deg);
+    transform-origin: center;
+    filter: drop-shadow(0 18px 22px rgba(0, 64, 128, 0.18));
+  }
+
+  .countdown__note-img {
+    width: var(--note-visible-width);
+    height: auto;
+    margin-left: var(--note-offset-x);
+  }
+
+  .countdown__value {
+    position: absolute;
+    left: calc(var(--note-offset-x) + (var(--note-visible-width) * 0.25));
+    width: calc(var(--note-visible-width) * 0.64);
+    top: 17%;
+    bottom: 19%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0a9dde;
+    font-family: var(--font-display);
+    font-size: clamp(3.9rem, 5.25vw, 6.85rem);
+    font-weight: 900;
+    line-height: 0.82;
+    letter-spacing: -0.05em;
+    text-align: center;
+    white-space: nowrap;
+    text-shadow: none;
+  }
+
+  .countdown__rainbow {
+    position: absolute;
+    z-index: 6;
+    left: calc(var(--note-offset-x) + (var(--note-visible-width) * 0.17));
+    bottom: 14%;
+    width: calc(var(--note-visible-width) * 0.155);
+    filter: drop-shadow(0 8px 10px rgba(0, 64, 128, 0.14));
+  }
+
+  .countdown__line {
+    position: absolute;
+    z-index: 3;
+    right: clamp(28px, 7vw, 135px);
+    top: clamp(20px, 2vw, 44px);
+    width: clamp(62px, 5.2vw, 98px);
+    transform: rotate(8deg);
+    pointer-events: none;
+    opacity: 0.96;
+  }
+
+  .countdown__arcade {
+    position: absolute;
+    z-index: 6;
+    right: clamp(34px, 7.2vw, 138px);
+    bottom: clamp(-30px, -1.4vw, -14px);
+    width: clamp(58px, 5.6vw, 100px);
+    transform: rotate(9deg);
+    filter: drop-shadow(0 12px 14px rgba(0, 64, 128, 0.2));
+  }
+
+  @media (max-width: 767px) {
+    .countdown {
+      min-height: 370px;
+    }
+
+    .countdown__background {
+      background-size: cover;
+      background-position: center center;
+    }
+
+    .countdown__inner {
+      width: 100%;
+      min-height: 370px;
+    }
+
+    .countdown__face {
+      left: clamp(28px, 8vw, 46px);
+      top: 34px;
+      width: clamp(96px, 32vw, 132px);
+      transform: none;
+    }
+
+    .countdown__title {
+      left: clamp(162px, 44vw, 210px);
+      top: 76px;
+      font-size: clamp(2.2rem, 11.5vw, 3.25rem);
+      transform: translateY(-50%);
+    }
+
+    .countdown__note {
+      --note-visible-width: 86%;
+      --note-offset-x: calc((100% - var(--note-visible-width)) / 2);
+      left: 50%;
+      top: 215px;
+      width: min(92vw, 390px);
+      transform: translateX(-50%) rotate(-5deg);
+    }
+
+    .countdown__value {
+      left: calc(var(--note-offset-x) + (var(--note-visible-width) * 0.25));
+      width: calc(var(--note-visible-width) * 0.64);
+      top: 17%;
+      bottom: 19%;
+      font-size: clamp(2.8rem, 12.8vw, 4.25rem);
+      letter-spacing: -0.045em;
+    }
+
+    .countdown__rainbow {
+      left: calc(var(--note-offset-x) + (var(--note-visible-width) * 0.17));
+      bottom: 14%;
+      width: calc(var(--note-visible-width) * 0.155);
+    }
+
+    .countdown__line {
+      right: clamp(14px, 5vw, 24px);
+      top: 20px;
+      width: clamp(56px, 15vw, 72px);
+    }
+
+    .countdown__arcade {
+      right: clamp(12px, 5vw, 24px);
+      bottom: -18px;
+      width: clamp(58px, 17vw, 74px);
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .countdown {
+      min-height: 270px;
+    }
+
+    .countdown__inner {
+      width: 100%;
+      min-height: 270px;
+    }
+
+    .countdown__face {
+      left: 8.5vw;
+      width: 136px;
+    }
+
+    .countdown__title {
+      left: 25.5vw;
+      font-size: 3.95rem;
+    }
+
+    .countdown__note {
+      --note-visible-width: 84%;
+      --note-offset-x: calc((100% - var(--note-visible-width)) / 2);
+      left: 56vw;
+      top: 55%;
+      width: 410px;
+    }
+
+    .countdown__value {
+      font-size: 5rem;
+    }
+
+    .countdown__line {
+      right: 5.5vw;
+      top: 26px;
+      width: 76px;
+    }
+
+    .countdown__arcade {
+      right: 4.5vw;
+      width: 74px;
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .countdown {
+      min-height: 290px;
+    }
+
+    .countdown__inner {
+      min-height: 290px;
+    }
+
+    .countdown__face {
+      left: 9.5vw;
+      width: 150px;
+    }
+
+    .countdown__title {
+      left: 28vw;
+      font-size: 4.4rem;
+    }
+
+    .countdown__note {
+      --note-visible-width: 83%;
+      --note-offset-x: calc((100% - var(--note-visible-width)) / 2);
+      left: 55vw;
+      top: 55%;
+      width: 480px;
+    }
+
+    .countdown__value {
+      font-size: 5.6rem;
+    }
+  }
+
+  @media (min-width: 1280px) and (max-width: 1599px) {
+    .countdown {
+      min-height: 315px;
+    }
+
+    .countdown__inner {
+      min-height: 315px;
+    }
+
+    .countdown__face {
+      left: 10.7vw;
+      width: clamp(150px, 11.2vw, 180px);
+    }
+
+    .countdown__title {
+      left: 30vw;
+      font-size: clamp(4.4rem, 4.4vw, 5.15rem);
+    }
+
+    .countdown__note {
+      --note-visible-width: 82%;
+      --note-offset-x: calc((100% - var(--note-visible-width)) / 2);
+      left: 55vw;
+      top: 55%;
+      width: clamp(500px, 36vw, 570px);
+    }
+
+    .countdown__value {
+      font-size: clamp(5.5rem, 5.2vw, 6.35rem);
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .countdown {
+      min-height: 365px;
+    }
+
+    .countdown__inner {
+      min-height: 365px;
+    }
+
+    .countdown__face {
+      left: 12.5vw;
+      width: 190px;
+    }
+
+    .countdown__title {
+      left: 31vw;
+      font-size: 5.45rem;
+    }
+
+    .countdown__note {
+      --note-visible-width: 82%;
+      --note-offset-x: calc((100% - var(--note-visible-width)) / 2);
+      left: 55.5vw;
+      top: 50%;
+      width: 580px;
+    }
+
+    .countdown__value {
+      font-size: 7rem;
+    }
+
+    .countdown__line {
+      top: 42px;
+    }
+  }
+
+
+
+
+
+/* ===== FESTIVAL KIDS MOBILE FINAL PATCH START ===== */
+@media (max-width: 767px) {
+  .countdown {
+    min-height: 430px;
+  }
+
+  .countdown__inner {
+    width: min(100% - 20px, 430px);
+    min-height: 430px;
+    margin-inline: auto;
+  }
+
+  .countdown__face {
+    left: clamp(34px, 10vw, 58px);
+    top: 30px;
+    width: clamp(86px, 28vw, 120px);
+    transform: none;
+  }
+
+  .countdown__title {
+    left: 50%;
+    top: 72px;
+    font-size: clamp(2rem, 10.5vw, 3rem);
+    transform: translate(-12%, -50%);
+    text-align: center;
+  }
+
+  .countdown__note {
+    --note-visible-width: 88%;
+    --note-offset-x: calc((100% - var(--note-visible-width)) / 2);
+    left: 50%;
+    top: 170px;
+    width: min(86vw, 348px);
+    transform: translateX(-50%) rotate(-5deg);
+  }
+
+  .countdown__note-img {
+    width: var(--note-visible-width);
+    margin-left: var(--note-offset-x);
+  }
+
+  .countdown__value {
+    left: calc(var(--note-offset-x) + (var(--note-visible-width) * 0.25));
+    width: calc(var(--note-visible-width) * 0.64);
+    top: 17%;
+    bottom: 19%;
+    font-size: clamp(2.45rem, 10.8vw, 3.55rem);
+    letter-spacing: -0.04em;
+  }
+
+  .countdown__rainbow {
+    left: calc(var(--note-offset-x) + (var(--note-visible-width) * 0.17));
+    bottom: 14%;
+    width: calc(var(--note-visible-width) * 0.155);
+  }
+
+  .countdown__line {
+    right: 22px;
+    top: 20px;
+    width: clamp(48px, 13vw, 62px);
+  }
+
+  .countdown__arcade {
+    right: 18px;
+    bottom: 34px;
+    width: clamp(52px, 15vw, 66px);
+  }
+}
+
+@media (max-width: 380px) {
+  .countdown {
+    min-height: 410px;
+  }
+
+  .countdown__inner {
+    min-height: 410px;
+  }
+
+  .countdown__note {
+    top: 230px;
+    width: min(84vw, 326px);
+  }
+
+  .countdown__value {
+    font-size: clamp(2.25rem, 10vw, 3.15rem);
+  }
+}
+/* ===== FESTIVAL KIDS MOBILE FINAL PATCH END ===== */
+</style>
