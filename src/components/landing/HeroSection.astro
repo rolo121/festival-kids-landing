@@ -14,14 +14,15 @@ const heroAssets = {
 
   <div class="hero__content">
     <div class="hero__copy">
+      <!-- H1 Semántico optimizado para motores de búsqueda -->
       <h1 id="hero-title" class="visually-hidden">
-        {eventInfo.name} - {eventInfo.claim} - {eventInfo.dateLabel} en {eventInfo.location}
+        {eventInfo.name} — {eventInfo.claim} — {eventInfo.dateLabel} en el Centro de Convenciones {eventInfo.location}
       </h1>
 
       <img
         class="hero__logo"
         src={heroAssets.logo}
-        alt="Festival Kids - Una aventura sin límites"
+        alt="Logotipo de Festival Kids 2026 — Una aventura sin límites organizada por BTL Marketing"
         loading="eager"
         decoding="async"
       />
@@ -29,7 +30,7 @@ const heroAssets = {
       <img
         class="hero__date"
         src={heroAssets.datePlace}
-        alt={`${eventInfo.dateLabel} - ${eventInfo.location}`}
+        alt={`Fecha del evento: ${eventInfo.dateLabel} en el Olof Palme, Managua`}
         loading="eager"
         decoding="async"
       />
