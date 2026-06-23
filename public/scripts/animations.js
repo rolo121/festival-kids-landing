@@ -19,6 +19,14 @@ const revealConfig = [
   { selector: '.countdown__note', type: 'right', delay: 140 },
   { selector: '.countdown__arcade', type: 'pop', delay: 220 },
 
+  { selector: '.stage-shows__title', type: 'pop', delay: 0 },
+  { selector: '.stage-shows__frame', type: 'pop', delay: 90 },
+  { selector: '.stage-shows__divider', type: 'pop', delay: 160 },
+  { selector: '.stage-shows__item', type: 'pop', delay: 230, stagger: 70 },
+  { selector: '.stage-shows__label-image', type: 'pop', delay: 300, stagger: 70 },
+  { selector: '.stage-shows__logo', type: 'pop', delay: 650 },
+  { selector: '.stage-shows__decoration', type: 'pop', delay: 170, stagger: 90 },
+
   { selector: '.highlights__item', type: 'pop', delay: 0, stagger: 90 },
 
   { selector: '.talent__image-card', type: 'left', delay: 0 },
@@ -35,6 +43,13 @@ const revealConfig = [
   { selector: '.hairstyles__girls', type: 'right', delay: 170 },
   { selector: '.hairstyles__butterfly', type: 'pop', delay: 240 },
 
+  { selector: '.ticket-panel__title-art', type: 'left', delay: 0 },
+  { selector: '.ticket-panel__ticket', type: 'pop', delay: 120 },
+  { selector: '.ticket-panel__pin', type: 'pop', delay: 220 },
+  { selector: '.ticket-panel__logo-chucherias', type: 'pop', delay: 290 },
+  { selector: '.ticket-panel__label', type: 'pop', delay: 370, stagger: 70 },
+  { selector: '.ticket-panel__logo-totto', type: 'pop', delay: 780 },
+
   { selector: '.sponsors__group', type: 'pop', delay: 0, stagger: 130 },
   { selector: '.sponsors__pill', type: 'pop', delay: 120, stagger: 120 },
   { selector: '.sponsors__logos', type: 'pop', delay: 120, stagger: 120 },
@@ -46,6 +61,7 @@ const tapSelectors = [
   '.talent-form__calendar-button',
   '.talent-form__submit',
   '.marathon-form__submit',
+  '.ticket-panel__label',
 ];
 
 function setupRevealAnimations() {

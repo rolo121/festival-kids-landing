@@ -7,6 +7,8 @@ import TalentShowSection from '@components/landing/TalentShowSection.astro';
 import MiniMarathonSection from '@components/landing/MiniMarathonSection.astro';
 import CrazyHairstylesSection from '@components/landing/CrazyHairstylesSection.astro';
 import SponsorsSection from '@components/landing/SponsorsSection.astro';
+import StageShowsSection from '@components/landing/StageShowsSection.astro';
+import TicketPanelSection from '@components/landing/TicketPanelSection.astro';
 import { seoInfo } from '@data/event';
 
 const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
@@ -20,10 +22,12 @@ const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^
   <main>
     <HeroSection />
     <CountdownSection />
+    <StageShowsSection />
     <HighlightsBar />
     <TalentShowSection />
     <MiniMarathonSection />
     <CrazyHairstylesSection />
+    <TicketPanelSection />
     <SponsorsSection />
   </main>
 

@@ -164,6 +164,78 @@
   }
 }
 
+@keyframes fk-stage-orb-drift {
+  0%, 100% {
+    translate: 0 0;
+    rotate: 0deg;
+    scale: 1;
+  }
+
+  35% {
+    translate: 4px -7px;
+    rotate: -1.2deg;
+    scale: 1.012;
+  }
+
+  70% {
+    translate: -3px 5px;
+    rotate: 1deg;
+    scale: 0.996;
+  }
+}
+
+@keyframes fk-butterfly-flutter {
+  0%, 100% {
+    translate: 0 0;
+    rotate: 0deg;
+    scale: 1;
+  }
+
+  24% {
+    translate: 8px -10px;
+    rotate: 8deg;
+    scale: 1.04;
+  }
+
+  52% {
+    translate: 14px 2px;
+    rotate: -5deg;
+    scale: 0.98;
+  }
+
+  78% {
+    translate: 5px 9px;
+    rotate: 6deg;
+    scale: 1.03;
+  }
+}
+
+@keyframes fk-pin-playful {
+  0%, 100% {
+    rotate: 0deg;
+  }
+
+  30% {
+    rotate: -4deg;
+  }
+
+  62% {
+    rotate: 3deg;
+  }
+}
+
+@keyframes fk-ticket-breathe {
+  0%, 100% {
+    translate: 0 0;
+    scale: 1;
+  }
+
+  50% {
+    translate: 0 -4px;
+    scale: 1.006;
+  }
+}
+
 .fk-motion-float-soft {
   animation: fk-float-soft var(--fk-motion-duration-soft) ease-in-out infinite;
   animation-delay: var(--fk-motion-delay, 0s);
@@ -191,7 +263,7 @@
 .fk-motion-card-sway {
   animation: fk-sway-card 6.4s ease-in-out infinite;
   animation-delay: var(--fk-motion-delay, 0s);
-  will-change: translate, rotate;
+  will-change: rotate;
 }
 
 .fk-motion-spin-soft {
@@ -396,6 +468,114 @@
   animation-delay: 0.2s;
 }
 
+/* Shows en Tarima */
+.stage-shows__item-image {
+  animation: fk-stage-orb-drift 6.4s ease-in-out infinite;
+  animation-delay: var(--fk-stage-delay, 0s);
+  transform-origin: center;
+  will-change: translate, rotate, scale;
+}
+
+.stage-shows__item--spiderman .stage-shows__item-image {
+  --fk-stage-delay: 0s;
+}
+
+.stage-shows__item--kpop .stage-shows__item-image {
+  --fk-stage-delay: 0.55s;
+}
+
+.stage-shows__item--zootopia .stage-shows__item-image {
+  --fk-stage-delay: 1.05s;
+}
+
+.stage-shows__item--paw-patrol .stage-shows__item-image {
+  --fk-stage-delay: 1.55s;
+}
+
+.stage-shows__item--bluey-bingo .stage-shows__item-image {
+  --fk-stage-delay: 0.35s;
+}
+
+.stage-shows__item--plim-plim .stage-shows__item-image {
+  --fk-stage-delay: 0.85s;
+}
+
+.stage-shows__item--futbolero .stage-shows__item-image {
+  --fk-stage-delay: 1.35s;
+}
+
+.stage-shows__item--fiesta-neon .stage-shows__item-image {
+  --fk-stage-delay: 1.85s;
+}
+
+.stage-shows__label-image {
+  transition:
+    translate 220ms ease,
+    scale 220ms ease,
+    filter 220ms ease;
+}
+
+.stage-shows__item:hover .stage-shows__label-image {
+  translate: 0 -2px;
+  scale: 1.025;
+  filter: brightness(1.04) drop-shadow(0 4px 0 rgba(0, 133, 209, 0.18));
+}
+
+.stage-shows__decoration--butterfly {
+  animation: fk-butterfly-flutter 5.6s ease-in-out infinite;
+  transform-origin: center;
+  will-change: translate, rotate, scale;
+}
+
+.stage-shows__decoration--flower {
+  animation: fk-wiggle-soft 6.8s ease-in-out infinite;
+  animation-delay: 0.25s;
+}
+
+.stage-shows__decoration--tube {
+  animation: fk-tube-drift 8.6s ease-in-out infinite;
+  animation-delay: 0.45s;
+}
+
+.stage-shows__logo {
+  animation: fk-float-soft 6.2s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+/* Boletos */
+.ticket-panel__pin {
+  animation: fk-pin-playful 4.8s ease-in-out infinite;
+  animation-delay: 0.25s;
+  transform-origin: 50% 70%;
+  will-change: rotate;
+}
+
+.ticket-panel__title-art {
+  animation: fk-float-soft 6.4s ease-in-out infinite;
+  animation-delay: 0.15s;
+  will-change: translate;
+}
+
+.ticket-panel__logo-chucherias {
+  animation: fk-pulse-soft 4.8s ease-in-out infinite;
+  animation-delay: 0.4s;
+}
+
+.ticket-panel__label,
+.ticket-panel__logo-totto {
+  transition:
+    translate 200ms ease,
+    scale 200ms ease,
+    filter 200ms ease;
+}
+
+.ticket-panel__label:hover,
+.ticket-panel__logo-totto:hover {
+  translate: 0 -2px;
+  scale: 1.025;
+  filter: brightness(1.04) drop-shadow(0 4px 0 rgba(0, 112, 190, 0.12));
+}
+
 /* Sponsors */
 .sponsors__flower,
 .sponsors__flower--left,
@@ -434,6 +614,18 @@
   .hairstyles__tube,
   .hairstyles__blue-ribbon {
     animation-duration: 10s;
+  }
+
+  .stage-shows__item-image {
+    animation-duration: 7.4s;
+  }
+
+  .stage-shows__decoration--butterfly {
+    animation-duration: 6.2s;
+  }
+
+  .ticket-panel__pin {
+    animation-duration: 5.6s;
   }
 }
 

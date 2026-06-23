@@ -1,0 +1,669 @@
+---
+const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+
+const stageAssets = {
+  background: withBase('/images/festival-kids/stage-shows/fondo_show.webp'),
+  frame: withBase('/images/festival-kids/stage-shows/fondo_aro_decorativo.webp'),
+  logo: withBase('/images/festival-kids/stage-shows/team_smile_logo.webp'),
+  flower: withBase('/images/festival-kids/stage-shows/decoration/flor_cara.webp'),
+  butterfly: withBase('/images/festival-kids/stage-shows/decoration/mariposa.webp'),
+  greenTube: withBase('/images/festival-kids/stage-shows/decoration/tubo_verde.webp'),
+};
+
+const stageShows = [
+  {
+    key: 'spiderman',
+    title: 'Spiderman y sus amigos',
+    image: withBase('/images/festival-kids/stage-shows/show/spiderman_y_sus_amigos.webp'),
+    labelImage: withBase('/images/festival-kids/stage-shows/label/label_spiderman_amigos.webp'),
+    x: '28.3%',
+    y: '30.4%',
+    width: '8.2%',
+    rotate: '-4deg',
+    labelX: '168%',
+    labelY: '31%',
+    labelWidth: '130%',
+    labelRotate: '-2deg',
+  },
+  {
+    key: 'kpop',
+    title: 'Las Guerreras K-Pop',
+    image: withBase('/images/festival-kids/stage-shows/show/las_gerraras_k_pop.webp'),
+    labelImage: withBase('/images/festival-kids/stage-shows/label/label_guerreras_k_pop.webp'),
+    x: '42.5%',
+    y: '44.4%',
+    width: '8.25%',
+    rotate: '2deg',
+    labelX: '-70%',
+    labelY: '52%',
+    labelWidth: '132%',
+    labelRotate: '-9deg',
+  },
+  {
+    key: 'zootopia',
+    title: 'Zootopia',
+    image: withBase('/images/festival-kids/stage-shows/show/zootopia.webp'),
+    labelImage: withBase('/images/festival-kids/stage-shows/label/label_zootopia.webp'),
+    x: '30.1%',
+    y: '58.9%',
+    width: '8.2%',
+    rotate: '-2deg',
+    labelX: '154%',
+    labelY: '42%',
+    labelWidth: '96%',
+    labelRotate: '-12deg',
+  },
+  {
+    key: 'paw-patrol',
+    title: 'Paw Patrol',
+    image: withBase('/images/festival-kids/stage-shows/show/paw_patrol.webp'),
+    labelImage: withBase('/images/festival-kids/stage-shows/label/label_paw_patrol.webp'),
+    x: '42.7%',
+    y: '72.2%',
+    width: '8.25%',
+    rotate: '-3deg',
+    labelX: '-60%',
+    labelY: '65%',
+    labelWidth: '104%',
+    labelRotate: '0deg',
+  },
+  {
+    key: 'bluey-bingo',
+    title: 'Bluey y Bingo',
+    image: withBase('/images/festival-kids/stage-shows/show/blueg_y_bimgo.webp'),
+    labelImage: withBase('/images/festival-kids/stage-shows/label/label_bluey.webp'),
+    x: '59.6%',
+    y: '35.4%',
+    width: '8.15%',
+    rotate: '2deg',
+    labelX: '157%',
+    labelY: '18%',
+    labelWidth: '104%',
+    labelRotate: '-5deg',
+  },
+  {
+    key: 'plim-plim',
+    title: 'Plim Plim',
+    image: withBase('/images/festival-kids/stage-shows/show/plim_plim.webp'),
+    labelImage: withBase('/images/festival-kids/stage-shows/label/label_plim_plim.webp'),
+    x: '72.7%',
+    y: '44.6%',
+    width: '8.2%',
+    rotate: '4deg',
+    labelX: '-54%',
+    labelY: '60%',
+    labelWidth: '86%',
+    labelRotate: '-8deg',
+  },
+  {
+    key: 'futbolero',
+    title: 'Show Futbolero con Cabezones',
+    image: withBase('/images/festival-kids/stage-shows/show/show_futbolero.webp'),
+    labelImage: withBase('/images/festival-kids/stage-shows/label/label_sow_futbolero.webp'),
+    x: '60.9%',
+    y: '59.2%',
+    width: '8.2%',
+    rotate: '-3deg',
+    labelX: '183%',
+    labelY: '47%',
+    labelWidth: '142%',
+    labelRotate: '-0deg',
+  },
+  {
+    key: 'fiesta-neon',
+    title: 'Fiesta Neón',
+    image: withBase('/images/festival-kids/stage-shows/show/fiesta_neon.webp'),
+    labelImage: withBase('/images/festival-kids/stage-shows/label/label_fiesta_neon.webp'),
+    x: '74%',
+    y: '72.2%',
+    width: '8.25%',
+    rotate: '3deg',
+    labelX: '-63%',
+    labelY: '65%',
+    labelWidth: '104%',
+    labelRotate: '-4deg',
+  },
+]
+---
+
+<section class="stage-shows" id="shows-en-tarima" aria-labelledby="stage-shows-title">
+  <div class="stage-shows__background" aria-hidden="true"></div>
+
+  <img
+    class="stage-shows__decoration stage-shows__decoration--butterfly decorative"
+    src={stageAssets.butterfly}
+    alt=""
+    loading="lazy"
+    decoding="async"
+  />
+
+  <img
+    class="stage-shows__decoration stage-shows__decoration--flower decorative"
+    src={stageAssets.flower}
+    alt=""
+    loading="lazy"
+    decoding="async"
+  />
+
+  <img
+    class="stage-shows__decoration stage-shows__decoration--tube decorative"
+    src={stageAssets.greenTube}
+    alt=""
+    loading="lazy"
+    decoding="async"
+  />
+
+  <div class="section-shell stage-shows__shell">
+    <div class="stage-shows__board" aria-label="Shows en tarima Festival Kids">
+      <img
+        class="stage-shows__frame decorative"
+        src={stageAssets.frame}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+
+      <h2 id="stage-shows-title" class="stage-shows__title">
+        <span>Shows</span>
+        <span>en tarima</span>
+      </h2>
+
+      <div class="stage-shows__content">
+        <span class="stage-shows__divider" aria-hidden="true"></span>
+
+        {stageShows.map((show) => (
+          <article
+            class={`stage-shows__item stage-shows__item--${show.key}`}
+            style={`--x:${show.x}; --y:${show.y}; --w:${show.width}; --r:${show.rotate}; --label-x:${show.labelX}; --label-y:${show.labelY}; --label-w:${show.labelWidth}; --label-r:${show.labelRotate};`}
+            aria-label={show.title}
+          >
+            <img
+              class="stage-shows__item-image"
+              src={show.image}
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+
+            <img
+              class="stage-shows__label-image"
+              src={show.labelImage}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              aria-hidden="true"
+            />
+          </article>
+        ))}
+
+        <img
+          class="stage-shows__logo decorative"
+          src={stageAssets.logo}
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style define:vars={{ stageBackground: `url("${stageAssets.background}")` }}>
+  .stage-shows {
+    position: relative;
+    isolation: isolate;
+    min-height: clamp(720px, 56.25vw, 1080px);
+    overflow: hidden;
+    background-color: #159dec;
+  }
+
+  .stage-shows__background {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-color: #159dec;
+    background-image: var(--stageBackground);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .stage-shows__shell {
+    position: relative;
+    z-index: 3;
+    width: min(100% - 24px, 1560px);
+    min-height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(42px, 5vw, 82px) 0 clamp(24px, 3vw, 46px);
+  }
+
+  .stage-shows__board {
+    position: relative;
+    width: min(94vw, 1480px);
+    aspect-ratio: 1227 / 688;
+    margin-inline: auto;
+  }
+
+  .stage-shows__frame {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    filter: drop-shadow(0 20px 28px rgba(0, 69, 130, 0.16));
+  }
+
+  .stage-shows__title {
+    position: absolute;
+    z-index: 5;
+    left: 50%;
+    top: 2.7%;
+    display: grid;
+    justify-items: center;
+    margin: 0;
+    color: #ffffff;
+    font-family: var(--font-display);
+    font-size: clamp(2.75rem, 4.55vw, 5.6rem);
+    font-weight: 900;
+    line-height: 0.74;
+    letter-spacing: -0.04em;
+    text-align: center;
+    text-transform: uppercase;
+    transform: translateX(-50%) rotate(-1deg);
+    -webkit-text-stroke: clamp(2px, 0.26vw, 5px) #139de1;
+    paint-order: stroke fill;
+    text-shadow:
+      0 5px 0 #139de1,
+      0 9px 0 rgba(255, 255, 255, 0.45),
+      0 12px 20px rgba(0, 93, 165, 0.16);
+    pointer-events: none;
+  }
+
+  .stage-shows__title::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+    top: 50%;
+    width: 115%;
+    height: 94%;
+    border-radius: 999px 999px 42px 42px;
+    background: #ffe600;
+    transform: translate(-50%, -52%);
+    box-shadow: 0 8px 0 rgba(238, 181, 0, 0.48);
+  }
+
+  .stage-shows__title span:first-child {
+    font-size: 1.1em;
+  }
+
+  .stage-shows__title span:last-child {
+    font-size: 0.86em;
+  }
+
+  .stage-shows__content {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+  }
+
+  .stage-shows__divider {
+    position: absolute;
+    left: 50%;
+    top: 29.2%;
+    width: 0;
+    height: 43%;
+    border-left: clamp(3px, 0.35vw, 5px) dotted #ef4b18;
+    transform: translateX(-50%);
+    opacity: 0.95;
+  }
+
+  .stage-shows__item {
+    position: absolute;
+    z-index: 4;
+    left: var(--x);
+    top: var(--y);
+    width: var(--w);
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+    filter: drop-shadow(0 12px 13px rgba(0, 88, 150, 0.16));
+  }
+
+  .stage-shows__item-image {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    object-fit: contain;
+    transform: rotate(var(--r));
+  }
+
+  .stage-shows__label-image {
+    position: absolute;
+    z-index: 5;
+    left: var(--label-x);
+    top: var(--label-y);
+    width: var(--label-w);
+    max-width: none;
+    height: auto;
+    transform: translate(-50%, -50%) rotate(var(--label-r));
+    transform-origin: center;
+    filter: drop-shadow(0 4px 0 rgba(0, 133, 209, 0.18));
+    pointer-events: none;
+  }
+
+  .stage-shows__logo {
+    position: absolute;
+    z-index: 5;
+    left: 50%;
+    bottom: 15.8%;
+    width: clamp(56px, 7.6%, 104px);
+    max-width: none;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 8px 10px rgba(0, 60, 110, 0.14));
+  }
+
+  .stage-shows__decoration {
+    position: absolute;
+    z-index: 4;
+    max-width: none;
+    filter: drop-shadow(0 12px 14px rgba(0, 78, 140, 0.16));
+  }
+
+  .stage-shows__decoration--butterfly {
+    left: clamp(26px, 11.2vw, 178px);
+    top: clamp(120px, 13vw, 192px);
+    width: clamp(38px, 4.3vw, 72px);
+    transform: rotate(8deg);
+  }
+
+  .stage-shows__decoration--flower {
+    left: clamp(-2px, 2.4vw, 52px);
+    bottom: clamp(34px, 7vw, 112px);
+    width: clamp(76px, 8.6vw, 132px);
+    transform: rotate(-7deg);
+  }
+
+  .stage-shows__decoration--tube {
+    right: clamp(-18px, 3vw, 66px);
+    bottom: clamp(52px, 9vw, 136px);
+    width: clamp(82px, 8.9vw, 144px);
+    transform: rotate(-8deg);
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .stage-shows {
+      min-height: 620px;
+      margin-top: 36px;
+    }
+
+    .stage-shows__shell {
+      width: min(100% - 18px, 1080px);
+      padding-top: 46px;
+      padding-bottom: 30px;
+    }
+
+    .stage-shows__board {
+      width: min(96vw, 1040px);
+    }
+
+    .stage-shows__title {
+      top: 3%;
+      font-size: clamp(2.25rem, 5.6vw, 4.2rem);
+    }
+
+    .stage-shows__decoration--butterfly {
+      left: 4vw;
+      top: 72px;
+      width: 48px;
+    }
+
+    .stage-shows__decoration--flower {
+      left: 12px;
+      bottom: 46px;
+      width: 88px;
+    }
+
+    .stage-shows__decoration--tube {
+      right: 10px;
+      bottom: 58px;
+      width: 92px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .stage-shows {
+      min-height: auto;
+      margin-top: 0;
+      overflow: hidden;
+    }
+
+    .stage-shows__background {
+      background-size: cover;
+      background-position: center bottom;
+    }
+
+    .stage-shows__shell {
+      width: min(100% - 18px, 430px);
+      min-height: auto;
+      padding: 46px 0 36px;
+      align-items: flex-start;
+    }
+
+    .stage-shows__board {
+      width: 100%;
+      height: auto;
+      min-height: auto;
+      aspect-ratio: auto;
+      margin-inline: auto;
+      padding-top: clamp(112px, 29vw, 134px);
+      padding-bottom: 0;
+    }
+
+    .stage-shows__frame,
+    .stage-shows__divider {
+      display: none;
+    }
+
+    .stage-shows__title {
+      top: 0;
+      font-size: clamp(1.86rem, 10.6vw, 3.1rem);
+      -webkit-text-stroke: 2px #139de1;
+      text-shadow:
+        0 3px 0 #139de1,
+        0 6px 0 rgba(255, 255, 255, 0.42),
+        0 9px 14px rgba(0, 93, 165, 0.14);
+    }
+
+    .stage-shows__title::before {
+      width: 118%;
+      height: 98%;
+      box-shadow: 0 5px 0 rgba(238, 181, 0, 0.45);
+    }
+
+    .stage-shows__content {
+      position: relative;
+      inset: auto;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+      column-gap: clamp(14px, 4.6vw, 24px);
+      row-gap: clamp(16px, 4.8vw, 24px);
+      width: 100%;
+      padding-inline: clamp(8px, 3vw, 14px);
+    }
+
+    .stage-shows__item {
+      position: relative;
+      left: auto !important;
+      top: auto !important;
+      z-index: 4;
+      width: 100% !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: clamp(4px, 1.5vw, 8px);
+      transform: none;
+      filter: drop-shadow(0 10px 11px rgba(0, 88, 150, 0.16));
+    }
+
+    .stage-shows__item-image {
+      width: min(100%, clamp(92px, 25vw, 122px));
+      max-width: none;
+      transform: rotate(var(--r));
+    }
+
+    .stage-shows__label-image {
+      position: relative;
+      left: auto;
+      top: auto;
+      width: min(96%, clamp(118px, 33vw, 158px));
+      max-width: none;
+      margin-top: 0;
+      transform: rotate(var(--label-r));
+      filter: drop-shadow(0 3px 0 rgba(0, 133, 209, 0.18));
+    }
+
+    .stage-shows__item--spiderman {
+      order: 1;
+      --label-r: -4deg !important;
+    }
+
+    .stage-shows__item--bluey-bingo {
+      order: 2;
+      --label-r: -4deg !important;
+    }
+
+    .stage-shows__item--kpop {
+      order: 3;
+      --label-r: -2deg !important;
+    }
+
+    .stage-shows__item--plim-plim {
+      order: 4;
+      --label-r: 1deg !important;
+    }
+
+    .stage-shows__item--zootopia {
+      order: 5;
+      --label-r: -2deg !important;
+    }
+
+    .stage-shows__item--futbolero {
+      order: 6;
+      --label-r: -2deg !important;
+    }
+
+    .stage-shows__item--paw-patrol {
+      order: 7;
+      --label-r: -3deg !important;
+    }
+
+    .stage-shows__item--fiesta-neon {
+      order: 8;
+      --label-r: -2deg !important;
+    }
+
+    .stage-shows__item--kpop .stage-shows__label-image,
+    .stage-shows__item--futbolero .stage-shows__label-image {
+      width: min(100%, clamp(128px, 35vw, 170px));
+    }
+
+    .stage-shows__item--plim-plim .stage-shows__label-image,
+    .stage-shows__item--zootopia .stage-shows__label-image,
+    .stage-shows__item--paw-patrol .stage-shows__label-image,
+    .stage-shows__item--fiesta-neon .stage-shows__label-image {
+      width: min(88%, clamp(104px, 30vw, 136px));
+    }
+
+    .stage-shows__logo {
+      position: relative;
+      grid-column: 1 / -1;
+      order: 9;
+      left: auto;
+      bottom: auto;
+      justify-self: center;
+      width: clamp(64px, 20vw, 86px);
+      min-width: 0;
+      margin-top: clamp(4px, 1.5vw, 8px);
+      transform: none;
+    }
+
+    .stage-shows__decoration--butterfly {
+      left: 18px;
+      top: 74px;
+      width: 34px;
+    }
+
+    .stage-shows__decoration--flower {
+      left: -10px;
+      bottom: 42px;
+      width: 68px;
+    }
+
+    .stage-shows__decoration--tube {
+      right: -14px;
+      bottom: 96px;
+      width: 76px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .stage-shows__shell {
+      width: min(100% - 16px, 400px);
+      padding-top: 42px;
+      padding-bottom: 34px;
+    }
+
+    .stage-shows__board {
+      padding-top: clamp(104px, 28vw, 118px);
+    }
+
+    .stage-shows__title {
+      font-size: clamp(1.78rem, 10.4vw, 2.65rem);
+    }
+
+    .stage-shows__content {
+      column-gap: 12px;
+      row-gap: 15px;
+      padding-inline: 6px;
+    }
+
+    .stage-shows__item-image {
+      width: min(100%, clamp(82px, 24vw, 108px));
+    }
+
+    .stage-shows__label-image {
+      width: min(94%, clamp(106px, 32vw, 140px));
+    }
+
+    .stage-shows__item--kpop .stage-shows__label-image,
+    .stage-shows__item--futbolero .stage-shows__label-image {
+      width: min(100%, clamp(116px, 35vw, 152px));
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .stage-shows__board {
+      width: min(91vw, 1520px);
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .stage-shows {
+      min-height: min(56.25vw, 1080px);
+    }
+
+    .stage-shows__board {
+      width: min(90vw, 1580px);
+    }
+  }
+</style>

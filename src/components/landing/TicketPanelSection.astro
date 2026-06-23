@@ -1,0 +1,468 @@
+---
+const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+
+const ticketAssets = {
+  background: withBase('/images/festival-kids/ticker_panel/fondo_ticket.webp'),
+  title: withBase('/images/festival-kids/ticker_panel/compra_tus_boletos.webp'),
+  ticket: withBase('/images/festival-kids/ticker_panel/ticke_grande.webp'),
+  pin: withBase('/images/festival-kids/talent-show/Icono_Pin_Inscripcion.webp'),
+  logoChucherias: withBase('/images/festival-kids/ticker_panel/label/logo_chucherias.webp'),
+  logoTotto: withBase('/images/festival-kids/ticker_panel/logo_totto.webp'),
+};
+
+const ticketLabels = [
+  {
+    key: 'multicentro',
+    name: 'Multicentro Las Américas',
+    image: withBase('/images/festival-kids/ticker_panel/label/label_multicentro.webp'),
+    x: '19.6%',
+    y: '45.8%',
+    width: '18.4%',
+    rotate: '-1deg',
+  },
+  {
+    key: 'plaza-inter',
+    name: 'Plaza Inter',
+    image: withBase('/images/festival-kids/ticker_panel/label/label_plaza_inter.webp'),
+    x: '40.6%',
+    y: '45.8%',
+    width: '15.4%',
+    rotate: '1deg',
+  },
+  {
+    key: 'plaza-natura',
+    name: 'Plaza Natura',
+    image: withBase('/images/festival-kids/ticker_panel/label/label_plaza_natura.webp'),
+    x: '58.9%',
+    y: '45.8%',
+    width: '16.1%',
+    rotate: '-1deg',
+  },
+  {
+    key: 'multicentro-brisas',
+    name: 'Multicentro Las Brisas',
+    image: withBase('/images/festival-kids/ticker_panel/label/label_multicentro_las_brisas.webp'),
+    x: '79.3%',
+    y: '45.8%',
+    width: '21.6%',
+    rotate: '1deg',
+  },
+  {
+    key: 'galerias',
+    name: 'Galerías Santo Domingo',
+    image: withBase('/images/festival-kids/ticker_panel/label/label_galerias.webp'),
+    x: '35.8%',
+    y: '72%',
+    width: '29.2%',
+    rotate: '0deg',
+  },
+  {
+    key: 'plaza-naciones',
+    name: 'Plaza Naciones Unidas',
+    image: withBase('/images/festival-kids/ticker_panel/label/label_plaza_naciones.webp'),
+    x: '66.6%',
+    y: '72%',
+    width: '28.8%',
+    rotate: '-1deg',
+  },
+];
+---
+
+<section class="ticket-panel" id="boletos" aria-labelledby="ticket-panel-title">
+  <div class="ticket-panel__background" aria-hidden="true"></div>
+
+  <div class="section-shell ticket-panel__shell">
+    <div class="ticket-panel__copy">
+      <img
+        id="ticket-panel-title"
+        class="ticket-panel__title-art"
+        src={ticketAssets.title}
+        alt="Comprá tus boletos para el Festival Kids"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <div class="ticket-panel__ticket" aria-label="Puntos de venta de boletos Festival Kids">
+      <img
+        class="ticket-panel__ticket-art decorative"
+        src={ticketAssets.ticket}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
+      />
+
+      <img
+        class="ticket-panel__pin decorative"
+        src={ticketAssets.pin}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
+      />
+
+      <div class="ticket-panel__ticket-content">
+        <img
+          class="ticket-panel__logo-chucherias"
+          src={ticketAssets.logoChucherias}
+          alt="Chucherías Mexicanas"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div class="ticket-panel__labels" aria-label="Puntos de venta">
+          {ticketLabels.map((label) => (
+            <img
+              class={`ticket-panel__label ticket-panel__label--${label.key}`}
+              src={label.image}
+              alt={label.name}
+              loading="lazy"
+              decoding="async"
+              style={`--x:${label.x}; --y:${label.y}; --w:${label.width}; --r:${label.rotate};`}
+            />
+          ))}
+        </div>
+
+        <img
+          class="ticket-panel__logo-totto"
+          src={ticketAssets.logoTotto}
+          alt="Totto"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+
+    <div class="ticket-panel__right-space" aria-hidden="true"></div>
+  </div>
+</section>
+
+<style define:vars={{ ticketBackground: `url("${ticketAssets.background}")` }}>
+  .ticket-panel {
+    position: relative;
+    z-index: 20;
+    isolation: isolate;
+    min-height: clamp(360px, 27.8vw, 500px);
+    overflow: hidden;
+    background-color: #16aeea;
+  }
+
+  .ticket-panel__background {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image: var(--ticketBackground);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center center;
+  }
+
+  .ticket-panel__background::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(90deg, rgba(0, 147, 223, 0.04) 0%, transparent 38%, rgba(255, 255, 255, 0.05) 100%),
+      repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.045) 0 2px, transparent 2px 6px);
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+  }
+
+  .ticket-panel__shell {
+    position: relative;
+    z-index: 8;
+    display: grid;
+    grid-template-columns: minmax(230px, 0.72fr) minmax(560px, 1.36fr) minmax(260px, 0.68fr);
+    align-items: center;
+    gap: clamp(16px, 2vw, 34px);
+    min-height: inherit;
+    width: min(100% - 32px, 1440px);
+    padding-block: clamp(24px, 3.4vw, 46px);
+  }
+
+  .ticket-panel__copy {
+    position: relative;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .ticket-panel__title-art {
+    position: relative;
+    z-index: 31;
+    width: min(100%, 350px);
+    height: auto;
+    filter: drop-shadow(0 12px 14px rgba(0, 92, 165, 0.18));
+  }
+
+  .ticket-panel__ticket {
+    position: relative;
+    z-index: 3;
+    width: min(100%, 710px);
+    justify-self: center;
+    filter: drop-shadow(0 18px 28px rgba(0, 75, 140, 0.18));
+  }
+
+  .ticket-panel__ticket-art {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: auto;
+  }
+
+  .ticket-panel__pin {
+    position: absolute;
+    left: 50%;
+    top: -8.2%;
+    z-index: 5;
+    width: clamp(42px, 7.8%, 66px);
+    max-width: none;
+    height: auto;
+    transform: translateX(-50%) rotate(7deg);
+    filter: drop-shadow(0 6px 0 rgba(0, 96, 190, 0.18));
+  }
+
+  .ticket-panel__ticket-content {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+  }
+
+  .ticket-panel__logo-chucherias {
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    z-index: 4;
+    width: clamp(82px, 13.4%, 126px);
+    max-width: none;
+    height: auto;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0 5px 6px rgba(90, 10, 10, 0.18));
+  }
+
+  .ticket-panel__labels {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+  }
+
+  .ticket-panel__label {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--w);
+    max-width: none;
+    height: auto;
+    transform: translate(-50%, -50%) rotate(var(--r));
+    filter: drop-shadow(0 4px 0 rgba(0, 112, 190, 0.12));
+  }
+
+  .ticket-panel__logo-totto {
+    position: absolute;
+    left: 50%;
+    top: 58%;
+    z-index: 6;
+    width: clamp(72px, 13.8%, 116px);
+    max-width: none;
+    height: auto;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.18));
+  }
+
+  .ticket-panel__right-space {
+    min-width: 0;
+  }
+
+  @media (min-width: 1280px) {
+    .ticket-panel__shell {
+      grid-template-columns: minmax(260px, 0.7fr) minmax(620px, 1.34fr) minmax(300px, 0.7fr);
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .ticket-panel {
+      min-height: 420px;
+    }
+
+    .ticket-panel__background {
+      background-size: cover;
+      background-position: center center;
+    }
+
+    .ticket-panel__shell {
+      grid-template-columns: 0.74fr 1.26fr;
+      gap: 22px;
+      width: min(100% - 24px, 960px);
+      padding-block: 44px;
+    }
+
+    .ticket-panel__right-space {
+      display: none;
+    }
+
+    .ticket-panel__title-art {
+      width: min(100%, 300px);
+    }
+
+    .ticket-panel__ticket {
+      width: min(100%, 600px);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .ticket-panel {
+      min-height: auto;
+      padding: 42px 0 46px;
+      background:
+        radial-gradient(circle at 16% 14%, rgba(255, 255, 255, 0.3) 0 10%, transparent 11%),
+        linear-gradient(155deg, #05a4e9 0%, #84dcff 55%, #d2f4ff 100%);
+    }
+
+    .ticket-panel__background {
+      background-size: cover;
+      background-position: center top;
+      opacity: 0.44;
+    }
+
+    .ticket-panel__shell {
+      width: min(100% - 28px, 430px);
+      display: grid;
+      grid-template-columns: 1fr;
+      justify-items: center;
+      gap: 22px;
+      min-height: auto;
+      padding-block: 0;
+    }
+
+    .ticket-panel__copy {
+      justify-content: center;
+    }
+
+    .ticket-panel__title-art {
+      width: min(86vw, 310px);
+    }
+
+    .ticket-panel__ticket {
+      width: min(100%, 390px);
+      min-height: auto;
+      padding: 66px 22px 26px;
+      border: 10px solid #e7191b;
+      border-radius: 28px;
+      background: #f23a10;
+      filter: drop-shadow(0 18px 24px rgba(0, 72, 132, 0.18));
+    }
+
+    .ticket-panel__ticket::before {
+      content: '';
+      position: absolute;
+      inset: 20px;
+      z-index: 2;
+      border: 4px dotted #ffe600;
+      border-radius: 18px;
+      pointer-events: none;
+    }
+
+    .ticket-panel__ticket-art {
+      display: none;
+    }
+
+    .ticket-panel__pin {
+      top: -34px;
+      width: 54px;
+    }
+
+    .ticket-panel__ticket-content {
+      position: relative;
+      inset: auto;
+      z-index: 4;
+      display: flex;
+      min-height: 100%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .ticket-panel__logo-chucherias {
+      position: relative;
+      left: auto;
+      top: auto;
+      z-index: 4;
+      width: 104px;
+      margin-bottom: 14px;
+      transform: none;
+    }
+
+    .ticket-panel__labels {
+      position: relative;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      align-items: center;
+      justify-items: center;
+      width: 100%;
+    }
+
+    .ticket-panel__label {
+      position: relative;
+      left: auto;
+      top: auto;
+      z-index: 4;
+      width: min(92%, 220px);
+      transform: none;
+    }
+
+    .ticket-panel__label--multicentro,
+    .ticket-panel__label--multicentro-brisas {
+      width: min(94%, 232px);
+    }
+
+    .ticket-panel__label--galerias,
+    .ticket-panel__label--plaza-naciones {
+      width: min(96%, 246px);
+    }
+
+    .ticket-panel__logo-totto {
+      position: relative;
+      left: auto;
+      top: auto;
+      z-index: 4;
+      width: 88px;
+      margin: 12px auto 6px;
+      transform: none;
+      order: 2;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .ticket-panel__shell {
+      width: min(100% - 22px, 380px);
+    }
+
+    .ticket-panel__ticket {
+      padding-inline: 16px;
+      border-width: 8px;
+      border-radius: 24px;
+    }
+
+    .ticket-panel__ticket::before {
+      inset: 17px;
+      border-width: 3px;
+    }
+
+    .ticket-panel__label {
+      width: min(90%, 206px);
+    }
+
+    .ticket-panel__label--galerias,
+    .ticket-panel__label--plaza-naciones {
+      z-index: 4;
+      width: min(92%, 220px);
+    }
+  }
+</style>
